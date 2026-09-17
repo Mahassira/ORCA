@@ -144,8 +144,27 @@ window.ORCA_I18N = {
     oc_team_5_title: "Human Resources Manager",
     oc_team_5_bio: "Shahinaz Soussa brings experience in financial management within the maritime industry, with expertise in accounts receivable, financial reporting, account reconciliation, and Microsoft Excel. Her previous experience at Maersk strengthened her capabilities in financial reporting and transparency. At ORCA, she contributes to continuous improvement and the achievement of strategic organizational objectives.",
 
+    nav_locations: "Our Locations",
+
     oc_cta_heading: "Let's Move Forward Together",
-    oc_cta_sub: "Whether you are looking for shipping solutions, commercial partnerships, or logistics support, our team is ready to help."
+    oc_cta_sub: "Whether you are looking for shipping solutions, commercial partnerships, or logistics support, our team is ready to help.",
+
+    loc_page_title: "Our Locations — ORCA Shipping & Agencies",
+    loc_hero_eyebrow: "Our Locations",
+    loc_hero_heading: "Where We Operate",
+    loc_hero_sub: "From our head office in New Cairo to key ports along Egypt's coastline, our network keeps your cargo moving.",
+
+    loc_hq_name: "Head Office — New Cairo",
+    loc_hq_desc: "ORCA Shipping & Agencies head office, Enawalks Mall, Al Narges, Fifth Settlement — commercial, operations, and customer service teams.",
+
+    loc_alex_name: "Alexandria Port",
+    loc_alex_desc: "Port agency and vessel operations on Egypt's Mediterranean coast.",
+
+    loc_damietta_name: "Damietta Port",
+    loc_damietta_desc: "Container handling and liner agency services in the Nile Delta region.",
+
+    loc_sokhna_name: "Ain Sokhna Port",
+    loc_sokhna_desc: "Red Sea gateway operations linking Egypt to global trade routes."
   },
 
   ar: {
@@ -289,8 +308,27 @@ window.ORCA_I18N = {
     oc_team_5_title: "مديرة الموارد البشرية",
     oc_team_5_bio: "تتمتع شاهيناز سوسة بخبرة في الإدارة المالية داخل صناعة الشحن البحري، مع كفاءة في الذمم المدينة والتقارير المالية والتسويات المحاسبية وبرنامج Microsoft Excel. عزّزت خبرتها السابقة لدى Maersk قدراتها في التقارير المالية والشفافية. تسهم في أوركا بتحقيق التحسين المستمر والأهداف الاستراتيجية للمؤسسة.",
 
+    nav_locations: "مواقعنا",
+
     oc_cta_heading: "لنتقدّم معًا إلى الأمام",
-    oc_cta_sub: "سواء كنت تبحث عن حلول شحن، أو شراكات تجارية، أو دعم لوجستي، فريقنا جاهز لمساعدتك."
+    oc_cta_sub: "سواء كنت تبحث عن حلول شحن، أو شراكات تجارية، أو دعم لوجستي، فريقنا جاهز لمساعدتك.",
+
+    loc_page_title: "مواقعنا — أوركا للشحن والوكالات",
+    loc_hero_eyebrow: "مواقعنا",
+    loc_hero_heading: "أينما نعمل",
+    loc_hero_sub: "من مقرنا الرئيسي في القاهرة الجديدة إلى أهم الموانئ على طول الساحل المصري، شبكتنا تحافظ على حركة شحنتك.",
+
+    loc_hq_name: "المقر الرئيسي — القاهرة الجديدة",
+    loc_hq_desc: "المقر الرئيسي لأوركا للشحن والوكالات، مول إناواكس، حي النرجس، التجمع الخامس — فرق العمل التجاري والتشغيل وخدمة العملاء.",
+
+    loc_alex_name: "ميناء الإسكندرية",
+    loc_alex_desc: "خدمات وكالة الموانئ وتشغيل السفن على الساحل المتوسطي لمصر.",
+
+    loc_damietta_name: "ميناء دمياط",
+    loc_damietta_desc: "خدمات مناولة الحاويات ووكالة الخطوط الملاحية في منطقة دلتا النيل.",
+
+    loc_sokhna_name: "ميناء العين السخنة",
+    loc_sokhna_desc: "عمليات بوابة البحر الأحمر التي تربط مصر بطرق التجارة العالمية."
   },
 
   zh: {
@@ -434,7 +472,26 @@ window.ORCA_I18N = {
     oc_team_5_title: "人力资源经理",
     oc_team_5_bio: "沙希纳兹·苏萨在海运行业的财务管理方面拥有丰富经验，专长包括应收账款、财务报告、账目核对及 Microsoft Excel 应用。她此前在马士基的工作经历增强了她在财务报告与透明度方面的能力。在 ORCA，她致力于持续改进并推动公司战略目标的实现。",
 
+    nav_locations: "我们的网点",
+
     oc_cta_heading: "让我们携手共创未来",
-    oc_cta_sub: "无论您需要航运解决方案、商业合作，还是物流支持，我们的团队随时为您提供帮助。"
+    oc_cta_sub: "无论您需要航运解决方案、商业合作，还是物流支持，我们的团队随时为您提供帮助。",
+
+    loc_page_title: "我们的网点 — ORCA 航运代理",
+    loc_hero_eyebrow: "我们的网点",
+    loc_hero_heading: "我们的业务范围",
+    loc_hero_sub: "从新开罗的总部到埃及沿海的重要港口，我们的网络保持您的货物持续运转。",
+
+    loc_hq_name: "总部 — 新开罗",
+    loc_hq_desc: "ORCA 航运代理总部，位于新开罗第五区纳尔吉斯区 Enawalks 购物中心 — 商务、运营及客户服务团队所在地。",
+
+    loc_alex_name: "亚历山大港",
+    loc_alex_desc: "在埃及地中海沿岸提供港口代理及船舶操作服务。",
+
+    loc_damietta_name: "杜姆亚特港",
+    loc_damietta_desc: "在尼罗河三角洲地区提供集装箱装卸及班轮代理服务。",
+
+    loc_sokhna_name: "苏赫纳港",
+    loc_sokhna_desc: "连接埃及与全球贸易航线的红海门户操作。"
   }
 };
