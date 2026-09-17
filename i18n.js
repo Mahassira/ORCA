@@ -39,7 +39,7 @@ window.ORCA_I18N = {
     about_heading: "A pivotal link in global trade",
     about_body: "ORCA Shipping And Agencies, a division of the Orca Shipping Group, specializes in container shipping and liner services. Our expertise facilitates seamless movement of goods within and between emerging markets and major economies, serving as a pivotal link in global trade.",
 
-    stat_years: "Years of Experience",
+    stat_years: "Years of Team Experience",
     stat_shipments: "Shipments Handled",
     stat_clients: "Satisfied Clients",
     stat_partnerships: "Global Partnerships",
@@ -128,7 +128,7 @@ window.ORCA_I18N = {
     oc_team_1_bio: "Ayman El Maghraby is an experienced maritime industry leader with extensive expertise in operations management, freight, import, sales, negotiation, and business development. As CEO & Managing Director, he leads ORCA's strategic direction and supports the company's growth through strong commercial and operational expertise. He holds a Bachelor's degree in Accounting from the Faculty of Commerce, Ain Shams University.",
 
     oc_team_2_name: "Mohamed Fakher",
-    oc_team_2_title: "Commercial Manager",
+    oc_team_2_title: "Line Manager",
     oc_team_2_role_extra: "ORCA Shipping And Agencies — SeaLead Agent",
     oc_team_2_bio: "Mohamed Fakher is the Commercial Manager at ORCA Shipping And Agencies, supporting the company's commercial activities and business relationships as SeaLead Agent in Egypt.",
 
@@ -157,36 +157,36 @@ window.ORCA_I18N = {
     nav_contact: "تواصل معنا",
     quote_cta: "اطلب عرض سعر",
 
-    hero_eyebrow: "مجموعة أوركا للشحن — القاهرة الجديدة، مصر",
-    hero_headline: "نقدّم الثقة والموثوقية والابتكار في عالم الشحن البحري",
+    hero_eyebrow: "شركة أوركا للشحن — القاهرة الجديدة، مصر",
+    hero_headline: "نقدم الثقة والمهنية والابتكار في عالم الشحن البحري",
     scroll_hint: "مرّر للأسفل",
 
     services_eyebrow: "خدماتنا",
-    services_heading: "أيًا كان ما تحتاجه، نحن هنا لمساعدتك",
+    services_heading: "أيًا كان ما تحتاجه من لوجستيات، نحن هنا لمساعدتك",
 
     svc_1_title: "وكالة الموانئ الشاملة",
-    svc_1_desc: "نقدّم خدمات وكالة موانئ شاملة، لضمان سير عمليات سفن شركائنا بسلاسة من وصولها إلى المحطة المخصصة وحتى مغادرتها.",
+    svc_1_desc: "نقدم خدمات وكالة موانئ شاملة، لضمان سير عمليات سفن شركائنا بسلاسة من وصولها إلى المحطة المخصصة وحتى مغادرتها.",
     svc_2_title: "إدارة مركز الوكالة",
-    svc_2_desc: "نقدّم خدمات وكالة شحن شاملة لتسهيل أعمال شركائنا في جميع المجالات، بما في ذلك الجوانب التجارية والتشغيلية والمالية.",
+    svc_2_desc: "نقدم خدمات وكالة شحن شاملة لتسهيل أعمال شركائنا في جميع المجالات، بما في ذلك الجوانب التجارية والتشغيلية والمالية.",
     svc_3_title: "أنشطة اللوجستيات والشحن",
-    svc_3_desc: "نقدّم خدمات إعاشة شاملة، تشمل تبديل الطواقم، وخدمات تموين السفن، وإمداد الوقود.",
+    svc_3_desc: "نقدم خدمات إعاشة شاملة، تشمل تبديل الطواقم، وخدمات تموين السفن، وإمداد الوقود.",
     svc_4_title: "عبور قناة السويس",
-    svc_4_desc: "نقدّم خدمات متخصصة لعبور قناة السويس لسفن شركائنا من خلال فريقنا من الخبراء.",
+    svc_4_desc: "نقدم خدمات متخصصة لعبور قناة السويس لسفن شركائنا من خلال فريقنا من الخبراء.",
     svc_5_title: "تشغيل السفن والبضائع",
-    svc_5_desc: "نقدّم خدمات شاملة لتشغيل السفن والبضائع، تشمل إعداد قوائم التحميل، وإدارة ملفات التبادل الإلكتروني للبيانات، وتخطيط الشحنات، والتنسيق بين خطط الشحن الخاصة بالسفينة والمحطة.",
+    svc_5_desc: "نقدم خدمات شاملة لتشغيل السفن والبضائع، تشمل إعداد قوائم التحميل، وإدارة ملفات التبادل الإلكتروني للبيانات، وتخطيط الشحنات، والتنسيق بين خطط الشحن الخاصة بالسفينة والمحطة.",
     svc_6_title: "وكالة الإعاشة",
-    svc_6_desc: "يقدّم قسم اللوجستيات المتخصص لدينا خدمات شاملة تشمل النقل البري، والتخليص الجمركي، والتخزين، والتبريد، والتثبيت، وغير ذلك.",
+    svc_6_desc: "يقدم قسم اللوجستيات المتخصص لدينا خدمات شاملة تشمل النقل البري، والتخليص الجمركي، والتخزين، والتبريد، والتثبيت، وغير ذلك.",
 
     cargo_eyebrow: "عمليات السفن والبضائع",
     cargo_heading: "دقة تامة، من قائمة التحميل إلى التثبيت",
 
     about_eyebrow: "من نحن",
     about_heading: "حلقة محورية في التجارة العالمية",
-    about_body: "أوركا للشحن والوكالات، أحد فروع مجموعة أوركا للشحن، متخصصة في شحن الحاويات وخدمات الخطوط الملاحية المنتظمة. تُسهّل خبرتنا حركة البضائع بسلاسة داخل الأسواق الناشئة والاقتصادات الكبرى وفيما بينها، لتكون حلقة محورية في التجارة العالمية.",
+    about_body: "أوركا للشحن والوكالات هي شركة متخصصة في شحن الحاويات وخدمات الخطوط الملاحية المنتظمة. تُسهّل خبرتنا حركة البضائع بسلاسة داخل الأسواق الناشئة والاقتصادات الكبرى وفيما بينها، لتكون حلقة محورية في التجارة العالمية.",
 
-    stat_years: "سنوات من الخبرة",
+    stat_years: "سنوات من خبرات فريقنا",
     stat_shipments: "شحنة تمت معالجتها",
-    stat_clients: "عميل راضٍ",
+    stat_clients: "عميل راض",
     stat_partnerships: "شراكة عالمية",
 
     quote_eyebrow: "اطلب عرض سعر",
@@ -273,7 +273,7 @@ window.ORCA_I18N = {
     oc_team_1_bio: "أيمن المغربي قائد ذو خبرة واسعة في صناعة الشحن البحري، تشمل إدارة العمليات والشحن والاستيراد والمبيعات والتفاوض وتطوير الأعمال. بصفته الرئيس التنفيذي والمدير العام، يقود التوجه الاستراتيجي لشركة أوركا ويدعم نموها من خلال خبرته التجارية والتشغيلية القوية. حاصل على بكالوريوس المحاسبة من كلية التجارة، جامعة عين شمس.",
 
     oc_team_2_name: "محمد فاخر",
-    oc_team_2_title: "المدير التجاري",
+    oc_team_2_title: "المدير المباشر",
     oc_team_2_role_extra: "أوركا للشحن والوكالات — وكيل SeaLead",
     oc_team_2_bio: "محمد فاخر هو المدير التجاري في أوركا للشحن والوكالات، ويدعم الأنشطة التجارية للشركة وعلاقات الأعمال بصفته وكيل SeaLead في مصر.",
 
@@ -289,7 +289,7 @@ window.ORCA_I18N = {
     oc_team_5_title: "مديرة الموارد البشرية",
     oc_team_5_bio: "تتمتع شاهيناز سوسة بخبرة في الإدارة المالية داخل صناعة الشحن البحري، مع كفاءة في الذمم المدينة والتقارير المالية والتسويات المحاسبية وبرنامج Microsoft Excel. عزّزت خبرتها السابقة لدى Maersk قدراتها في التقارير المالية والشفافية. تسهم في أوركا بتحقيق التحسين المستمر والأهداف الاستراتيجية للمؤسسة.",
 
-    oc_cta_heading: "لنتقدّم معًا إلى الأمام",
+    oc_cta_heading: "لنتقدم معًا إلى الأمام",
     oc_cta_sub: "سواء كنت تبحث عن حلول شحن، أو شراكات تجارية، أو دعم لوجستي، فريقنا جاهز لمساعدتك."
   }
 };
