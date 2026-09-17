@@ -12,7 +12,7 @@ window.ORCA_I18N = {
     nav_contact: "Contact Us",
     quote_cta: "Get a Quotation",
 
-    hero_eyebrow: "ORCA Shipping Group — New Cairo, Egypt",
+    hero_eyebrow: "ORCA Shipping Company — New Cairo, Egypt",
     hero_headline: "Delivering trust, reliability, and innovation in global shipping",
     scroll_hint: "Scroll",
 
