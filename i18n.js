@@ -17,7 +17,7 @@ window.ORCA_I18N = {
     scroll_hint: "Scroll",
 
     services_eyebrow: "Our Services",
-    services_heading: "Anything you need, we're here to help",
+    services_heading: "Anything you need related the logistics, we're here to help",
 
     svc_1_title: "Full Port Agency",
     svc_1_desc: "We offer comprehensive port agency services, ensuring seamless operations for our partners' vessels from arrival at the designated terminal to departure.",
