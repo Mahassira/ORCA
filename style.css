@@ -85,7 +85,23 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   border-radius:16px; transition:background .25s, color .25s; white-space:nowrap;
 }
 .lang-btn.is-active{background:#fff; color:var(--navy); font-weight:600;}
-@media(max-width:820px){.lang-switch{margin-inline-end:12px;}}
+.mobile-lang-switch{display:none;}
+.lang-notice{display:none;}
+@media(max-width:820px){
+  .lang-switch{display:none;} /* desktop pill hidden on mobile; flags live inside the menu instead */
+  .lang-notice{
+    display:block; text-align:center; color:var(--text-dim); font-size:0.82rem;
+    margin-top:18px; letter-spacing:0.02em;
+  }
+  .mobile-lang-switch{
+    display:flex; justify-content:center; gap:22px; margin-top:10px;
+  }
+  .flag-btn{
+    font-size:1.8rem; line-height:1; padding:8px; border-radius:12px;
+    background:rgba(255,255,255,0.06); transition:background .25s, transform .2s;
+  }
+  .flag-btn.is-active{background:rgba(255,255,255,0.18); transform:scale(1.08);}
+}
 
 .nav-toggle{display:none; width:30px; height:22px; position:relative; z-index:110;}
 .nav-toggle span{position:absolute; left:0; right:0; height:2px; background:#fff; transition:transform .3s, opacity .3s;}
@@ -572,3 +588,23 @@ html[dir="rtl"] .oc-about-inner{text-align:right;}
 
 /* shared: CTA supporting paragraph (used on Our Company; harmless if unused elsewhere) */
 .cta-sub{color:var(--text-dim); font-size:1.02rem; line-height:1.75; max-width:56ch; margin:0 auto 30px;}
+
+/* ============================================================
+   SPLASH SCREEN — brief brand cover shown while the page paints,
+   hides the initial flash of stale poster/video frames.
+   ============================================================ */
+.splash-screen{
+  position:fixed; inset:0; z-index:9999;
+  background:var(--navy-deep);
+  display:flex; align-items:center; justify-content:center;
+  transition:opacity .4s ease;
+}
+.splash-screen.is-hidden{opacity:0; pointer-events:none;}
+.splash-logo{
+  width:110px; height:auto; opacity:0;
+  animation:splashFadeIn .5s ease forwards;
+}
+@keyframes splashFadeIn{ from{opacity:0; transform:scale(0.94);} to{opacity:1; transform:scale(1);} }
+@media(prefers-reduced-motion: reduce){
+  .splash-logo{animation:none; opacity:1;}
+}
