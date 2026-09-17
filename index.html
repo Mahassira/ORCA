@@ -3,15 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n="oc_page_title">Our Company — ORCA Shipping & Agencies</title>
-<meta name="description" content="ORCA Shipping and Agencies — established 2022 in Egypt, official agent for renowned shipping lines. Meet the leadership team behind our operations.">
+<title data-i18n="page_title">ORCA Shipping & Agencies — Global Shipping, Experienced Through Motion</title>
+<meta name="description" content="ORCA Shipping And Agencies — official agent for renowned shipping lines, delivering trust, reliability, and innovation in global shipping across Egypt and the Suez Canal.">
 <link rel="icon" href="orca logo.svg">
 <style>
   /* Critical splash-screen CSS, inlined so it paints instantly — before the
      external stylesheet finishes loading. Without this, slower connections
      (mostly mobile) briefly show the raw unstyled page: white background,
      white logo on white = invisible logo flash in the header area. */
-  .splash-screen{position:fixed;inset:0;z-index:9999;background:#0A1B2E;display:flex;align-items:center;justify-content:center;}
+  .splash-screen{position:fixed;inset:0;z-index:9999;background:#0A1B2E;display:flex;align-items:center;justify-content:center;pointer-events:none;animation:splashAutoHide 1.5s ease forwards;}
+  @keyframes splashAutoHide{0%,60%{opacity:1;visibility:visible;}100%{opacity:0;visibility:hidden;}}
+  .splash-screen.is-hidden{opacity:0;visibility:hidden;}
   .splash-logo{width:110px;height:auto;}
 </style>
 <link rel="stylesheet" href="style.css">
@@ -25,161 +27,399 @@
   (function(){
     var el = document.getElementById('splashScreen');
     if(!el) return;
+
+    // Show the splash only on the very first page of a browsing session,
+    // or on an actual reload — not on every internal link click between
+    // Home / Services / Our Company, which would feel repetitive.
+    var navType = 'navigate';
+    try{
+      var entries = performance.getEntriesByType('navigation');
+      if(entries && entries.length) navType = entries[0].type;
+    }catch(e){}
+
+    var alreadyShown = false;
+    try{ alreadyShown = sessionStorage.getItem('orca_splash_shown') === '1'; }catch(e){}
+
+    if(alreadyShown && navType !== 'reload'){
+      el.style.display = 'none';
+      return;
+    }
+    try{ sessionStorage.setItem('orca_splash_shown', '1'); }catch(e){}
+
     setTimeout(function(){
       el.classList.add('is-hidden');
-      setTimeout(function(){ el.remove(); }, 450);
+      setTimeout(function(){ if(el && el.parentNode) el.remove(); }, 450);
     }, 850);
   })();
 </script>
 
 <!-- ============ NAV ============ -->
-<nav class="site-nav is-solid" id="siteNav">
-  <a class="nav-logo" href="index.html#top" aria-label="ORCA Shipping and Agencies — Home">
+<nav class="site-nav" id="siteNav">
+  <a class="nav-logo" href="#top" aria-label="ORCA Shipping and Agencies — Home">
     <img src="orca logo white.png" alt="ORCA Shipping and Agencies">
   </a>
   <div class="nav-links" id="navLinks">
-    <a href="index.html#top" data-i18n="nav_home">Home</a>
+    <a href="#top" data-i18n="nav_home">Home</a>
     <a href="services.html" data-i18n="nav_services">Services & Logistics</a>
     <a href="our company.html" data-i18n="nav_about">Our Company</a>
-    <a href="index.html#quote" data-i18n="nav_contact">Contact Us</a>
-<div class="lang-notice">🌐 English · العربية · 中文</div>
-    <div class="mobile-lang-switch" id="mobileLangSwitch" role="group" aria-label="Language">
+    <a href="#quote" data-i18n="nav_contact">Contact Us</a>
+<div class="mobile-lang-switch" id="mobileLangSwitch" role="group" aria-label="Language">
       <button type="button" data-lang="en" class="lang-btn flag-btn" aria-label="English">🇺🇸</button>
       <button type="button" data-lang="ar" class="lang-btn flag-btn" aria-label="العربية">🇪🇬</button>
       <button type="button" data-lang="zh" class="lang-btn flag-btn" aria-label="中文">🇨🇳</button>
     </div>
-    <a class="nav-cta-mobile" href="index.html#quote" data-i18n="quote_cta">Get a Quotation</a>
+    <a class="nav-cta-mobile" href="#quote" data-i18n="quote_cta">Get a Quotation</a>
   </div>
   <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
     <button type="button" data-lang="en" class="lang-btn is-active">EN</button>
     <button type="button" data-lang="ar" class="lang-btn">عربي</button>
     <button type="button" data-lang="zh" class="lang-btn">中文</button>
   </div>
-  <a class="nav-cta" href="index.html#quote" data-i18n="quote_cta">Get a Quotation</a>
+  <a class="nav-cta" href="#quote" data-i18n="quote_cta">Get a Quotation</a>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- ============ HERO ============ -->
-<section class="oc-hero">
-  <img class="oc-hero-bg" src="about company hero.png" alt="Container ship at a lit port at night, overlaid with a world trade network graphic">
-  <div class="oc-hero-overlay"></div>
-  <div class="oc-hero-copy">
-    <div class="eyebrow" data-i18n="nav_about">Our Company</div>
-    <h1 data-i18n="oc_hero_headline">Moving Trade. Connecting Markets.</h1>
-    <p data-i18n="oc_hero_sub">ORCA Shipping and Agencies, established in 2022 in Egypt, has quickly positioned itself as a trusted leader in the maritime and logistics industry. Serving as the official agent for several renowned shipping lines, ORCA delivers a full spectrum of shipping and logistics solutions tailored to the needs of global trade. Backed by a team of seasoned professionals and industry experts, the company ensures seamless operations, efficient execution, and service excellence while upholding the highest international standards.</p>
+<div id="top"></div>
+
+<!-- ============ CINEMATIC SEQUENCE (open sea → port/services → cargo) ============ -->
+<section class="cinematic" id="cinematic" aria-label="ORCA — from open sea to port to cargo operations">
+  <div class="cinematic-stage">
+
+    <!-- Scene 1: Open sea (mobile: branded hero clip) -->
+    <div class="scene scene-sea scene--vertical" data-scene="0">
+      <div class="scene-blur" style="background-image:url('scene open sea poster.jpg')"></div>
+      <video muted loop playsinline preload="auto"
+             poster="scene open sea poster.jpg"
+             data-poster-mobile="mobile hero poster.jpg"
+             data-src-desktop="scene open sea.mp4"
+             data-src-mobile="mobile hero.mp4"></video>
+    </div>
+
+    <!-- Scene 2: Port operations (desktop only — mobile no longer uses .cinematic at all) -->
+    <div class="scene scene-port scene--vertical" data-scene="1">
+      <div class="scene-blur" style="background-image:url('scene port poster.jpg')"></div>
+      <video muted loop playsinline preload="none"
+             poster="scene port poster.jpg"
+             data-src-desktop="scene port.mp4"
+             data-src-mobile="scene port.mp4"></video>
+    </div>
+
+    <!-- Scene 3: Cargo handling (desktop only) -->
+    <div class="scene scene-cargo scene--vertical" data-scene="2">
+      <div class="scene-blur" style="background-image:url('scene cargo poster.jpg')"></div>
+      <video muted loop playsinline preload="none"
+             poster="scene cargo poster.jpg"
+             data-src-desktop="scene cargo.mp4"
+             data-src-mobile="scene cargo.mp4"></video>
+    </div>
+
+    <div class="cine-progress" aria-hidden="true"><i id="cineProgressFill"></i></div>
+
+    <div class="stage-copy">
+      <!-- Act 1 -->
+      <div class="act-hero" id="actHero">
+        <div class="eyebrow" data-i18n="hero_eyebrow">ORCA Shipping Group — New Cairo, Egypt</div>
+        <h1 data-i18n="hero_headline">Delivering trust, reliability, and innovation in global shipping</h1>
+      </div>
+      <div class="scroll-hint" id="scrollHint"><span data-i18n="scroll_hint">Scroll</span><div class="wire"></div></div>
+
+      <!-- Act 2 -->
+      <div class="act-services" id="actServices">
+        <div class="services-head" id="servicesHead">
+          <div class="eyebrow" data-i18n="services_eyebrow">Our Services</div>
+          <h2 data-i18n="services_heading">Anything you need, we're here to help</h2>
+        </div>
+        <div class="service-slot" data-slot="0">
+          <span class="n">01</span>
+          <h3 data-i18n="svc_1_title">Full Port Agency</h3>
+          <p data-i18n="svc_1_desc">We offer comprehensive port agency services, ensuring seamless operations for our partners' vessels from arrival at the designated terminal to departure.</p>
+        </div>
+        <div class="service-slot" data-slot="1">
+          <span class="n">02</span>
+          <h3 data-i18n="svc_2_title">Agency HUB Management</h3>
+          <p data-i18n="svc_2_desc">We offer comprehensive shipping agency services to facilitate our partners' business operations across all areas, including commercial, operational, and financial.</p>
+        </div>
+        <div class="service-slot" data-slot="2">
+          <span class="n">03</span>
+          <h3 data-i18n="svc_3_title">Logistics & Forwarding activities</h3>
+          <p data-i18n="svc_3_desc">We provide comprehensive husbandry services, including crew changes, ship chandler services, and fuel supply.</p>
+        </div>
+        <div class="service-slot" data-slot="3">
+          <span class="n">04</span>
+          <h3 data-i18n="svc_4_title">Suez Canal Transit</h3>
+          <p data-i18n="svc_4_desc">We offer specialized Suez Canal transit services for our partners' vessels through our expert team.</p>
+        </div>
+        <div class="service-slot" data-slot="4">
+          <span class="n">05</span>
+          <h3 data-i18n="svc_5_title">Vessel & Cargo operation</h3>
+          <p data-i18n="svc_5_desc">We provide comprehensive vessel and cargo operation services, including load listing, EDI file management, cargo planning, and coordination between vessel and terminal cargo planning.</p>
+        </div>
+        <div class="service-slot" data-slot="5">
+          <span class="n">06</span>
+          <h3 data-i18n="svc_6_title">Husbandry Agency</h3>
+          <p data-i18n="svc_6_desc">Our dedicated logistics department offers comprehensive services including trucking, customs clearance, warehousing, cold storage, lashing, and more.</p>
+        </div>
+        <div class="service-dots" id="serviceDots" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+
+      <!-- Act 3 (desktop) -->
+      <div class="act-cargo" id="actCargo">
+        <div class="eyebrow" data-i18n="cargo_eyebrow">Vessel & Cargo Operations</div>
+        <h2 data-i18n="cargo_heading">Precision, from load list to lashing</h2>
+      </div>
+
+      <!-- Act 3 (mobile only) — About Us folded into the single-video sequence -->
+      <div class="act-about" id="actAbout">
+        <div class="eyebrow" data-i18n="about_eyebrow">About Us</div>
+        <h2 data-i18n="about_heading">A pivotal link in global trade</h2>
+        <p data-i18n="about_body">ORCA Shipping And Agencies, a division of the Orca Shipping Group, specializes in container shipping and liner services. Our expertise facilitates seamless movement of goods within and between emerging markets and major economies, serving as a pivotal link in global trade.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ============ ABOUT ORCA ============ -->
-<section class="oc-about">
-  <div class="oc-about-inner">
+<span id="services-anchor" style="position:relative; top:-80px; display:block;" aria-hidden="true"></span>
+
+<!-- ============ MOBILE ONLY: plain stacked sections, no scroll-jacking ============
+     Desktop keeps the pinned cinematic sequence above; on mobile that section is
+     hidden entirely and these two plain, normally-flowing sections take over.
+     Video playback here is handled natively by the browser (autoplay+muted+loop),
+     no JavaScript involved, so there is nothing that can break on scroll-up. -->
+<section class="m-hero" id="mHero">
+  <video class="m-bg" autoplay muted loop playsinline preload="auto"
+         poster="mobile hero poster.jpg"
+         src="mobile hero.mp4"></video>
+  <div class="m-hero-overlay"></div>
+  <div class="m-hero-copy">
+    <div class="eyebrow" data-i18n="hero_eyebrow">ORCA Shipping Group — New Cairo, Egypt</div>
+    <h1 data-i18n="hero_headline">Delivering trust, reliability, and innovation in global shipping</h1>
+  </div>
+</section>
+
+<section class="m-services" id="mServices">
+  <div class="m-services-photo">
+    <img src="mobile services bg.jpg" alt="Container terminal at sunset with quay cranes silhouetted against the sky">
+    <div class="m-services-photo-fade"></div>
+    <div class="m-services-photo-copy">
+      <div class="eyebrow" data-i18n="services_eyebrow">Our Services</div>
+      <h2 data-i18n="services_heading">Anything you need, we're here to help</h2>
+    </div>
+  </div>
+  <div class="m-services-copy">
+    <div class="m-rows">
+      <div class="m-row"><span class="n">01</span><div><h3 data-i18n="svc_1_title">Full Port Agency</h3><p data-i18n="svc_1_desc">We offer comprehensive port agency services, ensuring seamless operations for our partners' vessels from arrival at the designated terminal to departure.</p></div></div>
+      <div class="m-row"><span class="n">02</span><div><h3 data-i18n="svc_2_title">Agency HUB Management</h3><p data-i18n="svc_2_desc">We offer comprehensive shipping agency services to facilitate our partners' business operations across all areas, including commercial, operational, and financial.</p></div></div>
+      <div class="m-row"><span class="n">03</span><div><h3 data-i18n="svc_3_title">Logistics & Forwarding activities</h3><p data-i18n="svc_3_desc">We provide comprehensive husbandry services, including crew changes, ship chandler services, and fuel supply.</p></div></div>
+      <div class="m-row"><span class="n">04</span><div><h3 data-i18n="svc_4_title">Suez Canal Transit</h3><p data-i18n="svc_4_desc">We offer specialized Suez Canal transit services for our partners' vessels through our expert team.</p></div></div>
+      <div class="m-row"><span class="n">05</span><div><h3 data-i18n="svc_5_title">Vessel & Cargo operation</h3><p data-i18n="svc_5_desc">We provide comprehensive vessel and cargo operation services, including load listing, EDI file management, cargo planning, and coordination between vessel and terminal cargo planning.</p></div></div>
+      <div class="m-row"><span class="n">06</span><div><h3 data-i18n="svc_6_title">Husbandry Agency</h3><p data-i18n="svc_6_desc">Our dedicated logistics department offers comprehensive services including trucking, customs clearance, warehousing, cold storage, lashing, and more.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NO-MOTION FALLBACK SERVICES (shown only with prefers-reduced-motion) ============ -->
+<section class="no-motion-services">
+  <div class="eyebrow" data-i18n="services_eyebrow">Our Services</div>
+  <h2 data-i18n="services_heading">Anything you need, we're here to help</h2>
+  <div class="rows">
+    <div class="row"><div class="n">01</div><div><h3 data-i18n="svc_1_title">Full Port Agency</h3><p data-i18n="svc_1_desc">We offer comprehensive port agency services, ensuring seamless operations for our partners' vessels from arrival at the designated terminal to departure.</p></div></div>
+    <div class="row"><div class="n">02</div><div><h3 data-i18n="svc_2_title">Agency HUB Management</h3><p data-i18n="svc_2_desc">We offer comprehensive shipping agency services to facilitate our partners' business operations across all areas, including commercial, operational, and financial.</p></div></div>
+    <div class="row"><div class="n">03</div><div><h3 data-i18n="svc_3_title">Logistics & Forwarding activities</h3><p data-i18n="svc_3_desc">We provide comprehensive husbandry services, including crew changes, ship chandler services, and fuel supply.</p></div></div>
+    <div class="row"><div class="n">04</div><div><h3 data-i18n="svc_4_title">Suez Canal Transit</h3><p data-i18n="svc_4_desc">We offer specialized Suez Canal transit services for our partners' vessels through our expert team.</p></div></div>
+    <div class="row"><div class="n">05</div><div><h3 data-i18n="svc_5_title">Vessel & Cargo operation</h3><p data-i18n="svc_5_desc">We provide comprehensive vessel and cargo operation services, including load listing, EDI file management, cargo planning, and coordination between vessel and terminal cargo planning.</p></div></div>
+    <div class="row"><div class="n">06</div><div><h3 data-i18n="svc_6_title">Husbandry Agency</h3><p data-i18n="svc_6_desc">Our dedicated logistics department offers comprehensive services including trucking, customs clearance, warehousing, cold storage, lashing, and more.</p></div></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="about-media">
+    <img src="suez canal 1.jpg" alt="View from a container ship's deck approaching a port terminal near the Suez Canal, mountains in the background">
+  </div>
+  <div class="about-copy">
     <div class="eyebrow" data-i18n="about_eyebrow">About Us</div>
-    <h2 data-i18n="oc_about_heading">Built Around Experience. Driven by Excellence.</h2>
-    <p data-i18n="oc_about_body">Since its founding, ORCA Shipping And Agencies has focused on delivering complete shipping and logistics solutions as the official agent for renowned shipping lines. Our team pairs hands-on operational experience with commercial expertise to keep every client's operation running smoothly, upholding the highest standards of quality and reliability at every stage of the shipment.</p>
+    <h2 data-i18n="about_heading">A pivotal link in global trade</h2>
+    <p data-i18n="about_body">ORCA Shipping And Agencies, a division of the Orca Shipping Group, specializes in container shipping and liner services. Our expertise facilitates seamless movement of goods within and between emerging markets and major economies, serving as a pivotal link in global trade.</p>
   </div>
 </section>
 
-<!-- ============ OUR APPROACH ============ -->
-<section class="oc-principles">
-  <div class="oc-principles-grid">
-    <div class="oc-principle">
-      <span class="oc-principle-n">01</span>
-      <h3 data-i18n="oc_principle_1_title">Reliability</h3>
-      <p data-i18n="oc_principle_1_desc">We keep our word and our schedule, shipment after shipment.</p>
+<!-- ============ MOBILE ONLY: About Us with video banner (mirrors the Services layout) ============ -->
+<section class="m-about" id="mAbout">
+  <div class="m-about-media">
+    <video autoplay muted loop playsinline preload="none"
+           poster="mobile about poster.jpg"
+           src="mobile about.mp4"></video>
+    <div class="m-about-fade"></div>
+    <div class="m-about-media-copy">
+      <div class="eyebrow" data-i18n="about_eyebrow">About Us</div>
+      <h2 data-i18n="about_heading">A pivotal link in global trade</h2>
     </div>
-    <div class="oc-principle">
-      <span class="oc-principle-n">02</span>
-      <h3 data-i18n="oc_principle_2_title">Operational Excellence</h3>
-      <p data-i18n="oc_principle_2_desc">Precise execution, built on hands-on industry experience.</p>
-    </div>
-    <div class="oc-principle">
-      <span class="oc-principle-n">03</span>
-      <h3 data-i18n="oc_principle_3_title">Customer Focus</h3>
-      <p data-i18n="oc_principle_3_desc">Solutions shaped around each client's specific needs.</p>
-    </div>
-    <div class="oc-principle">
-      <span class="oc-principle-n">04</span>
-      <h3 data-i18n="oc_principle_4_title">Global Connectivity</h3>
-      <p data-i18n="oc_principle_4_desc">A network of relationships linking our operations to global markets.</p>
-    </div>
+  </div>
+  <div class="m-about-copy">
+    <p data-i18n="about_body">ORCA Shipping And Agencies, a division of the Orca Shipping Group, specializes in container shipping and liner services. Our expertise facilitates seamless movement of goods within and between emerging markets and major economies, serving as a pivotal link in global trade.</p>
   </div>
 </section>
 
-<!-- ============ MEET OUR TEAM ============ -->
-<section class="oc-team">
-  <div class="oc-team-head">
-    <div class="eyebrow" data-i18n="oc_team_eyebrow">Leadership</div>
-    <h2 data-i18n="oc_team_heading">Meet Our Team</h2>
-    <p data-i18n="oc_team_sub">Experienced professionals driving ORCA forward.</p>
+<div class="stats" id="stats">
+  <div class="stat"><div class="num" data-count="25" data-suffix="+">0+</div><div class="lbl" data-i18n="stat_years">Years of Experience</div></div>
+  <div class="stat"><div class="num" data-count="74100" data-suffix="+">0+</div><div class="lbl" data-i18n="stat_shipments">Shipments Handled</div></div>
+  <div class="stat"><div class="num" data-count="300" data-suffix="+">0+</div><div class="lbl" data-i18n="stat_clients">Satisfied Clients</div></div>
+  <div class="stat"><div class="num" data-count="50" data-suffix="+">0+</div><div class="lbl" data-i18n="stat_partnerships">Global Partnerships</div></div>
+</div>
+
+<!-- ============ REQUEST A QUOTE ============ -->
+<section class="quote" id="quote">
+  <div class="quote-head">
+    <div class="eyebrow" data-i18n="quote_eyebrow">Get a Quotation</div>
+    <h2 data-i18n="quote_heading">Tell us what you're moving</h2>
+    <p data-i18n="quote_body">Share your shipment details below and our team will come back to you with a tailored quote.</p>
   </div>
 
-  <!-- Featured: CEO -->
-  <div class="oc-member oc-member--featured">
-    <div class="oc-member-media">
-      <img src="ayman el maghraby.jpg" alt="Portrait of Ayman El Maghraby, CEO and Managing Director of ORCA Shipping and Agencies" loading="lazy">
+  <form class="quote-form" id="quoteForm" novalidate>
+    <div class="qf-row">
+      <div class="qf-field">
+        <label for="qOrigin" data-i18n="field_origin_label">Origin port</label>
+        <input type="text" id="qOrigin" name="origin" placeholder="e.g. Alexandria" data-i18n-placeholder="field_origin_placeholder" required>
+      </div>
+      <div class="qf-field">
+        <label for="qDestination" data-i18n="field_destination_label">Destination port</label>
+        <input type="text" id="qDestination" name="destination" placeholder="e.g. Jebel Ali" data-i18n-placeholder="field_destination_placeholder" required>
+      </div>
     </div>
-    <div class="oc-member-copy">
-      <span class="oc-principle-n">01</span>
-      <h3 data-i18n="oc_team_1_name">Ayman El Maghraby</h3>
-      <div class="oc-member-title" data-i18n="oc_team_1_title">CEO & Managing Director</div>
-      <p data-i18n="oc_team_1_bio">Ayman El Maghraby is an experienced maritime industry leader with extensive expertise in operations management, freight, import, sales, negotiation, and business development. As CEO & Managing Director, he leads ORCA's strategic direction and supports the company's growth through strong commercial and operational expertise. He holds a Bachelor's degree in Accounting from the Faculty of Commerce, Ain Shams University.</p>
-    </div>
-  </div>
 
-  <!-- Member 02 -->
-  <div class="oc-member">
-    <div class="oc-member-media">
-      <img src="mohamed fakher.jpg" alt="Portrait of Mohamed Fakher, Commercial Manager at ORCA Shipping and Agencies" loading="lazy">
-    </div>
-    <div class="oc-member-copy">
-      <span class="oc-principle-n">02</span>
-      <h3 data-i18n="oc_team_2_name">Mohamed Fakher</h3>
-      <div class="oc-member-title" data-i18n="oc_team_2_title">Commercial Manager</div>
-      <div class="oc-member-role-extra" data-i18n="oc_team_2_role_extra">ORCA Shipping And Agencies — SeaLead Agent</div>
-      <p data-i18n="oc_team_2_bio">Mohamed Fakher is the Commercial Manager at ORCA Shipping And Agencies, supporting the company's commercial activities and business relationships as SeaLead Agent in Egypt.</p>
-    </div>
-  </div>
+    <div class="qf-field qf-field--full">
+      <span class="qf-label-standalone" id="containerLabel" data-i18n="container_type_label">Container type</span>
 
-  <!-- Member 03 -->
-  <div class="oc-member oc-member--reverse">
-    <div class="oc-member-media">
-      <img src="mona saleh.jpg" alt="Portrait of Mona Saleh, Customer Excellence Manager at ORCA Shipping and Agencies" loading="lazy">
-    </div>
-    <div class="oc-member-copy">
-      <span class="oc-principle-n">03</span>
-      <h3 data-i18n="oc_team_3_name">Mona Saleh</h3>
-      <div class="oc-member-title" data-i18n="oc_team_3_title">Customer Excellence Manager</div>
-      <p data-i18n="oc_team_3_bio">Mona Saleh is an experienced Customer Excellence Manager with over 12 years of experience in the shipping and logistics industry. She brings extensive expertise in customer service, export management, and operational leadership, with experience at global organizations including A.P. Moller – Maersk and Seago Line. At ORCA, she focuses on optimizing customer service, improving operational efficiency, and driving process improvements that support business growth and customer satisfaction.</p>
-    </div>
-  </div>
+      <div class="container-selector" role="radiogroup" aria-labelledby="containerLabel" id="containerSelector">
 
-  <!-- Member 04 -->
-  <div class="oc-member">
-    <div class="oc-member-media">
-      <img src="MohammedAli.jpg" alt="Portrait of Mohamed Aly, Finance Manager at ORCA Shipping and Agencies" loading="lazy">
-    </div>
-    <div class="oc-member-copy">
-      <span class="oc-principle-n">04</span>
-      <h3 data-i18n="oc_team_4_name">Mohamed Aly</h3>
-      <div class="oc-member-title" data-i18n="oc_team_4_title">Finance Manager</div>
-      <p data-i18n="oc_team_4_bio">Mohamed Aly brings extensive experience in financial management within the shipping industry, with expertise in financial oversight, corporate management, process improvement, and finance transformation. His experience strengthens financial efficiency, cost control, and reporting. At ORCA, he contributes to developing effective financial systems and supporting strategic organizational objectives.</p>
-    </div>
-  </div>
+        <button type="button" class="container-option" data-value="soc" role="radio" aria-checked="false" aria-label="Shipper Owned Container" data-i18n-aria-label="container_soc_aria">
+          <svg class="container-svg" viewBox="0 0 200 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g transform="translate(20,58)">
+              <path d="M0 34 L0 4 L10 -6 L90 -6 L90 34 Z" class="c-body"/>
+              <path d="M0 4 L10 -6 L100 -6 L90 4 Z" class="c-top"/>
+              <path d="M90 -6 L100 -6 L100 34 L90 34 Z" class="c-side"/>
+              <g class="c-ribs">
+                <line x1="10" y1="4" x2="10" y2="34"/><line x1="24" y1="4" x2="24" y2="34"/>
+                <line x1="38" y1="4" x2="38" y2="34"/><line x1="52" y1="4" x2="52" y2="34"/>
+                <line x1="66" y1="4" x2="66" y2="34"/><line x1="80" y1="4" x2="80" y2="34"/>
+              </g>
+            </g>
+          </svg>
+          <span class="c-badge" data-i18n="container_soc_badge">SOC</span>
+          <span class="c-size">—</span>
+          <span class="c-name" data-i18n="container_soc_name">Shipper Owned Container</span>
+        </button>
 
-  <!-- Member 05 -->
-  <div class="oc-member oc-member--reverse">
-    <div class="oc-member-media">
-      <img src="shahinaz soussa.jpg" alt="Portrait of Shahinaz Soussa, Human Resources Manager at ORCA Shipping and Agencies" loading="lazy">
+        <button type="button" class="container-option" data-value="20std" role="radio" aria-checked="false" aria-label="20 foot Dry Standard container" data-i18n-aria-label="container_20std_aria">
+          <svg class="container-svg" viewBox="0 0 200 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g transform="translate(20,58)">
+              <path d="M0 34 L0 4 L10 -6 L90 -6 L90 34 Z" class="c-body"/>
+              <path d="M0 4 L10 -6 L100 -6 L90 4 Z" class="c-top"/>
+              <path d="M90 -6 L100 -6 L100 34 L90 34 Z" class="c-side"/>
+              <g class="c-ribs">
+                <line x1="10" y1="4" x2="10" y2="34"/><line x1="24" y1="4" x2="24" y2="34"/>
+                <line x1="38" y1="4" x2="38" y2="34"/><line x1="52" y1="4" x2="52" y2="34"/>
+                <line x1="66" y1="4" x2="66" y2="34"/><line x1="80" y1="4" x2="80" y2="34"/>
+              </g>
+            </g>
+          </svg>
+          <span class="c-size" data-i18n="container_20std_size">20 ft</span>
+          <span class="c-name" data-i18n="container_20std_name">20' Dry Standard</span>
+        </button>
+
+        <button type="button" class="container-option" data-value="40std" role="radio" aria-checked="false" aria-label="40 foot Dry Standard container" data-i18n-aria-label="container_40std_aria">
+          <svg class="container-svg" viewBox="0 0 200 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g transform="translate(6,58)">
+              <path d="M0 34 L0 4 L10 -6 L170 -6 L170 34 Z" class="c-body"/>
+              <path d="M0 4 L10 -6 L180 -6 L170 4 Z" class="c-top"/>
+              <path d="M170 -6 L180 -6 L180 34 L170 34 Z" class="c-side"/>
+              <g class="c-ribs">
+                <line x1="10" y1="4" x2="10" y2="34"/><line x1="24" y1="4" x2="24" y2="34"/>
+                <line x1="38" y1="4" x2="38" y2="34"/><line x1="52" y1="4" x2="52" y2="34"/>
+                <line x1="66" y1="4" x2="66" y2="34"/><line x1="80" y1="4" x2="80" y2="34"/>
+                <line x1="94" y1="4" x2="94" y2="34"/><line x1="108" y1="4" x2="108" y2="34"/>
+                <line x1="122" y1="4" x2="122" y2="34"/><line x1="136" y1="4" x2="136" y2="34"/>
+                <line x1="150" y1="4" x2="150" y2="34"/><line x1="164" y1="4" x2="164" y2="34"/>
+              </g>
+            </g>
+          </svg>
+          <span class="c-size" data-i18n="container_40std_size">40 ft</span>
+          <span class="c-name" data-i18n="container_40std_name">40' Dry Standard</span>
+        </button>
+
+        <button type="button" class="container-option" data-value="40hc" role="radio" aria-checked="false" aria-label="40 foot Dry High Cube container" data-i18n-aria-label="container_40hc_aria">
+          <svg class="container-svg" viewBox="0 0 200 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g transform="translate(6,64)">
+              <path d="M0 40 L0 4 L10 -6 L170 -6 L170 40 Z" class="c-body"/>
+              <path d="M0 4 L10 -6 L180 -6 L170 4 Z" class="c-top"/>
+              <path d="M170 -6 L180 -6 L180 40 L170 40 Z" class="c-side"/>
+              <g class="c-ribs">
+                <line x1="10" y1="4" x2="10" y2="40"/><line x1="24" y1="4" x2="24" y2="40"/>
+                <line x1="38" y1="4" x2="38" y2="40"/><line x1="52" y1="4" x2="52" y2="40"/>
+                <line x1="66" y1="4" x2="66" y2="40"/><line x1="80" y1="4" x2="80" y2="40"/>
+                <line x1="94" y1="4" x2="94" y2="40"/><line x1="108" y1="4" x2="108" y2="40"/>
+                <line x1="122" y1="4" x2="122" y2="40"/><line x1="136" y1="4" x2="136" y2="40"/>
+                <line x1="150" y1="4" x2="150" y2="40"/><line x1="164" y1="4" x2="164" y2="40"/>
+              </g>
+              <line x1="0" y1="4" x2="170" y2="4" class="c-hc-band"/>
+            </g>
+          </svg>
+          <span class="c-size" data-i18n="container_40hc_size">40 ft HC</span>
+          <span class="c-name" data-i18n="container_40hc_name">40' Dry High Cube</span>
+        </button>
+
+        <button type="button" class="container-option" data-value="45hc" role="radio" aria-checked="false" aria-label="45 foot Dry High Cube container" data-i18n-aria-label="container_45hc_aria">
+          <svg class="container-svg" viewBox="0 0 200 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g transform="translate(2,64)">
+              <path d="M0 40 L0 4 L10 -6 L186 -6 L186 40 Z" class="c-body"/>
+              <path d="M0 4 L10 -6 L196 -6 L186 4 Z" class="c-top"/>
+              <path d="M186 -6 L196 -6 L196 40 L186 40 Z" class="c-side"/>
+              <g class="c-ribs">
+                <line x1="10" y1="4" x2="10" y2="40"/><line x1="24" y1="4" x2="24" y2="40"/>
+                <line x1="38" y1="4" x2="38" y2="40"/><line x1="52" y1="4" x2="52" y2="40"/>
+                <line x1="66" y1="4" x2="66" y2="40"/><line x1="80" y1="4" x2="80" y2="40"/>
+                <line x1="94" y1="4" x2="94" y2="40"/><line x1="108" y1="4" x2="108" y2="40"/>
+                <line x1="122" y1="4" x2="122" y2="40"/><line x1="136" y1="4" x2="136" y2="40"/>
+                <line x1="150" y1="4" x2="150" y2="40"/><line x1="164" y1="4" x2="164" y2="40"/>
+                <line x1="178" y1="4" x2="178" y2="40"/>
+              </g>
+              <line x1="0" y1="4" x2="186" y2="4" class="c-hc-band"/>
+            </g>
+          </svg>
+          <span class="c-size" data-i18n="container_45hc_size">45 ft HC</span>
+          <span class="c-name" data-i18n="container_45hc_name">45' Dry High Cube</span>
+        </button>
+
+      </div>
+      <input type="hidden" name="containerType" id="qContainerType" required>
+      <p class="qf-hint" id="containerHint" data-i18n="container_hint_default">Select a container type above.</p>
     </div>
-    <div class="oc-member-copy">
-      <span class="oc-principle-n">05</span>
-      <h3 data-i18n="oc_team_5_name">Shahinaz Soussa</h3>
-      <div class="oc-member-title" data-i18n="oc_team_5_title">Human Resources Manager</div>
-      <p data-i18n="oc_team_5_bio">Shahinaz Soussa brings experience in financial management within the maritime industry, with expertise in accounts receivable, financial reporting, account reconciliation, and Microsoft Excel. Her previous experience at Maersk strengthened her capabilities in financial reporting and transparency. At ORCA, she contributes to continuous improvement and the achievement of strategic organizational objectives.</p>
+
+    <div class="qf-row">
+      <div class="qf-field">
+        <label for="qName" data-i18n="field_name_label">Your name</label>
+        <input type="text" id="qName" name="name" placeholder="Full name" data-i18n-placeholder="field_name_placeholder" required>
+      </div>
+      <div class="qf-field">
+        <label for="qEmail" data-i18n="field_email_label">Email</label>
+        <input type="email" id="qEmail" name="email" placeholder="you@company.com" data-i18n-placeholder="field_email_placeholder" required>
+      </div>
     </div>
-  </div>
+
+    <div class="qf-field qf-field--full">
+      <label for="qDetails" data-i18n="field_details_label">Additional details</label>
+      <textarea id="qDetails" name="details" rows="3" placeholder="Cargo type, weight, preferred dates…" data-i18n-placeholder="field_details_placeholder"></textarea>
+    </div>
+
+    <div class="qf-actions">
+      <button type="submit" class="btn-primary btn-submit" data-i18n="submit_btn">Send Request</button>
+      <span class="qf-status" id="qfStatus" role="status" aria-live="polite"></span>
+    </div>
+  </form>
 </section>
 
 <!-- ============ CTA ============ -->
@@ -189,11 +429,10 @@
   </div>
   <div class="cta-inner">
     <img src="orca logo white.png" alt="">
-    <h2 data-i18n="oc_cta_heading">Let's Move Forward Together</h2>
-    <p class="cta-sub" data-i18n="oc_cta_sub">Whether you are looking for shipping solutions, commercial partnerships, or logistics support, our team is ready to help.</p>
+    <h2 data-i18n="cta_heading">Ready to move what matters</h2>
     <div class="cta-actions">
-      <a class="btn-primary" href="index.html#quote" data-i18n="quote_cta">Get a Quotation</a>
-      <a class="btn-ghost" href="mailto:info@orca-eg.com" data-i18n="nav_contact">Contact Us</a>
+      <a class="btn-primary" href="#quote" data-i18n="quote_cta">Get a Quotation</a>
+      <a class="btn-ghost" href="tel:+20226330247" dir="ltr">+2 02 63 30 2047</a>
     </div>
   </div>
 </section>
@@ -212,10 +451,10 @@
     </div>
     <div class="footer-col">
       <h4 data-i18n="footer_quicklinks_heading">Quick Links</h4>
-      <a href="index.html#top" data-i18n="nav_home">Home</a>
+      <a href="#top" data-i18n="nav_home">Home</a>
       <a href="services.html" data-i18n="nav_services">Services & Logistics</a>
       <a href="our company.html" data-i18n="nav_about">Our Company</a>
-      <a href="index.html#quote" data-i18n="nav_contact">Contact Us</a>
+      <a href="#quote" data-i18n="nav_contact">Contact Us</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -227,6 +466,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="i18n.js"></script>
-<script src="our company.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
