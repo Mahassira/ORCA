@@ -86,13 +86,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .lang-btn.is-active{background:#fff; color:var(--navy); font-weight:600;}
 .mobile-lang-switch{display:none;}
-.lang-notice{display:none;}
 @media(max-width:820px){
   .lang-switch{display:none;} /* desktop pill hidden on mobile; flags live inside the menu instead */
-  .lang-notice{
-    display:block; text-align:center; color:var(--text-dim); font-size:0.82rem;
-    margin-top:18px; letter-spacing:0.02em;
-  }
   .mobile-lang-switch{
     display:flex; justify-content:center; gap:22px; margin-top:10px;
   }
@@ -592,14 +587,29 @@ html[dir="rtl"] .oc-about-inner{text-align:right;}
 /* ============================================================
    SPLASH SCREEN — brief brand cover shown while the page paints,
    hides the initial flash of stale poster/video frames.
+
+   pointer-events:none from the very start (not just after JS hides it) is
+   deliberate: if the hide script is ever delayed or fails on some device,
+   the screen behind it must still be tappable — a splash should never be
+   able to block navigation, even in the worst case.
+
+   The auto-hide keyframe animation is a pure-CSS fallback that fades and
+   fully hides the splash on its own after ~1.5s regardless of JavaScript;
+   the inline script (in <head>) additionally removes it from the DOM once
+   JS is available, but the page is never dependent on JS to become usable.
    ============================================================ */
 .splash-screen{
   position:fixed; inset:0; z-index:9999;
   background:var(--navy-deep);
   display:flex; align-items:center; justify-content:center;
-  transition:opacity .4s ease;
+  pointer-events:none;
+  animation:splashAutoHide 1.5s ease forwards;
 }
-.splash-screen.is-hidden{opacity:0; pointer-events:none;}
+@keyframes splashAutoHide{
+  0%, 60% { opacity:1; visibility:visible; }
+  100% { opacity:0; visibility:hidden; }
+}
+.splash-screen.is-hidden{opacity:0; visibility:hidden;}
 .splash-logo{
   width:110px; height:auto; opacity:0;
   animation:splashFadeIn .5s ease forwards;
@@ -607,4 +617,5 @@ html[dir="rtl"] .oc-about-inner{text-align:right;}
 @keyframes splashFadeIn{ from{opacity:0; transform:scale(0.94);} to{opacity:1; transform:scale(1);} }
 @media(prefers-reduced-motion: reduce){
   .splash-logo{animation:none; opacity:1;}
+  .splash-screen{animation-duration:.6s;}
 }
