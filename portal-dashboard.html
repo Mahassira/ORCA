@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — ORCA Connect</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="orca logo.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="portal-header">
+  <a class="portal-header-logo" href="digital-solutions.html">
+    <img src="orca logo white.png" alt="ORCA">
+    <span class="portal-header-brand">ORCA Connect</span>
+  </a>
+  <div class="portal-header-actions">
+    <a href="digital-solutions.html">← Back to ORCA website</a>
+    <a href="#" id="portalLogout">Log out</a>
+  </div>
+</header>
+
+<div class="portal-demo-banner">DEMO DATA — NOT LIVE SHIPMENT INFORMATION</div>
+
+<main class="portal-main">
+  <div class="portal-main-inner">
+
+    <div class="portal-welcome">
+      <h1>Welcome to ORCA Connect</h1>
+      <p>Here's an overview of your shipments. All figures below are sample data for preview purposes.</p>
+    </div>
+
+    <!-- Summary cards -->
+    <div class="portal-summary" id="portalSummary"></div>
+
+    <!-- Shipment table -->
+    <div class="portal-section-head">
+      <h2>Your Shipments</h2>
+    </div>
+    <div class="portal-table-wrap">
+      <table class="portal-table">
+        <thead>
+          <tr>
+            <th>Shipment ID</th>
+            <th>Reference</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Status</th>
+            <th>ETA</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="portalShipmentRows"></tbody>
+      </table>
+    </div>
+
+    <!-- Documents -->
+    <div class="portal-section-head">
+      <h2>Documents</h2>
+    </div>
+    <div class="portal-docs" id="portalDocs"></div>
+
+  </div>
+</main>
+
+<script src="portal-data.js"></script>
+<script src="portal-dashboard.js"></script>
+</body>
+</html>
