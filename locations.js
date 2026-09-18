@@ -1,76 +1,13 @@
 /* ============================================================
    ORCA — Our Locations page
-   Nav + language switch (same pattern as the other secondary pages)
-   plus an interactive Leaflet map with four branded markers whose
-   popups stay in sync with the current language.
+   Nav + language switch (same pattern as the other secondary pages).
+   The map itself is a static image (PC/mobile variants swapped by
+   CSS media query) — no map library needed.
    ============================================================ */
 (function(){
   "use strict";
 
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------------- LOCATION DATA ----------------
-     Head office coordinate confirmed directly from Google Maps by the client;
-     port coordinates sourced from public port-authority/reference data. */
-  var LOCATIONS = [
-    { lat: 30.018210439162882, lng: 31.464246225717318, nameKey: 'loc_hq_name',       descKey: 'loc_hq_desc' },
-    { lat: 31.2000, lng: 29.8800, nameKey: 'loc_alex_name',     descKey: 'loc_alex_desc' },
-    { lat: 31.4670, lng: 31.7680, nameKey: 'loc_damietta_name', descKey: 'loc_damietta_desc' },
-    { lat: 29.6480, lng: 32.3560, nameKey: 'loc_sokhna_name',   descKey: 'loc_sokhna_desc' }
-  ];
-
-  var mapMarkers = []; // {marker, data}
-
-  function popupHTML(loc){
-    var dict = (window.ORCA_I18N && window.ORCA_I18N[currentLang]) || {};
-    var name = dict[loc.nameKey] || loc.nameKey;
-    var desc = dict[loc.descKey] || '';
-    return '<div class="loc-popup"><strong>' + name + '</strong><p>' + desc + '</p></div>';
-  }
-
-  function refreshPopups(){
-    mapMarkers.forEach(function(entry){
-      entry.marker.setPopupContent(popupHTML(entry.data));
-    });
-  }
-
-  function initMap(){
-    var el = document.getElementById('orcaMap');
-    if(!el || !window.L) return;
-
-    var map = L.map('orcaMap', {
-      scrollWheelZoom: false,
-      center: [30.6, 31.6],
-      zoom: 6
-    });
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      maxZoom: 19
-    }).addTo(map);
-
-    // Re-enable scroll-zoom only once the user has clicked into the map,
-    // so an ordinary page scroll doesn't get hijacked by the map underneath.
-    map.on('click', function(){ map.scrollWheelZoom.enable(); });
-
-    var bounds = [];
-    LOCATIONS.forEach(function(loc){
-      var marker = L.circleMarker([loc.lat, loc.lng], {
-        radius: 9,
-        weight: 2,
-        color: '#7BB3A4',
-        fillColor: '#3E7F72',
-        fillOpacity: 0.9
-      }).addTo(map);
-      marker.bindPopup(popupHTML(loc));
-      mapMarkers.push({ marker: marker, data: loc });
-      bounds.push([loc.lat, loc.lng]);
-    });
-
-    if(bounds.length){
-      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 7 });
-    }
-  }
 
   /* ---------------- LANGUAGE ENGINE (EN / AR / ZH) ---------------- */
   var LANG_KEY = 'orca_lang';
@@ -104,8 +41,6 @@
     document.querySelectorAll('.lang-btn').forEach(function(btn){
       btn.classList.toggle('is-active', btn.dataset.lang === lang);
     });
-
-    refreshPopups();
   }
 
   document.querySelectorAll('.lang-btn').forEach(function(btn){
@@ -150,7 +85,6 @@
   });
 
   applyLanguage(getSavedLang() || 'en');
-  initMap();
 
   /* ---------------- SIMPLE SCROLL REVEALS ---------------- */
   if(!prefersReduced && window.gsap && window.ScrollTrigger){
