@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shipment Details — ORCA Connect</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="orca logo.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="portal-header">
+  <a class="portal-header-logo" href="digital-solutions.html">
+    <img src="orca logo white.png" alt="ORCA">
+    <span class="portal-header-brand">ORCA Connect</span>
+  </a>
+  <div class="portal-header-actions">
+    <a href="portal-dashboard.html">← Back to Dashboard</a>
+    <a href="#" id="portalLogout">Log out</a>
+  </div>
+</header>
+
+<div class="portal-demo-banner">DEMO DATA — NOT LIVE SHIPMENT INFORMATION</div>
+
+<main class="portal-main">
+  <div class="portal-main-inner">
+
+    <div class="portal-welcome">
+      <h1 id="psTitle">Shipment</h1>
+      <p>Tracking details and document status for this shipment.</p>
+    </div>
+
+    <!-- Key facts -->
+    <div class="portal-shipment-meta" id="psMeta"></div>
+
+    <!-- Tracking timeline -->
+    <div class="portal-section-head">
+      <h2>Tracking Timeline</h2>
+    </div>
+    <div class="portal-timeline" id="psTimeline"></div>
+
+    <!-- Route visualization -->
+    <div class="portal-section-head">
+      <h2>Route</h2>
+    </div>
+    <div class="portal-route">
+      <span class="portal-route-badge">Demo Route</span>
+      <div class="portal-route-flow" id="psRoute"></div>
+    </div>
+
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="portal-data.js"></script>
+<script src="portal-shipment.js"></script>
+</body>
+</html>
