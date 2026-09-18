@@ -643,19 +643,24 @@ html[dir="rtl"] .oc-about-inner{text-align:right;}
 /* ============================================================
    DIGITAL SOLUTIONS PAGE
    ============================================================ */
-.ds-hero{background:var(--navy-deep); padding:calc(80px + 10vh) clamp(20px,6vw,64px) 10vh; color:#fff; position:relative; overflow:hidden;}
+.ds-hero{
+  padding:calc(80px + 10vh) clamp(20px,6vw,64px) 10vh; color:#fff; position:relative; overflow:hidden;
+  min-height:640px; display:flex; align-items:center;
+}
+.ds-hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;}
+.ds-hero-bg--mobile{display:none;}
+.ds-hero-overlay{
+  position:absolute; inset:0; z-index:1;
+  background:linear-gradient(180deg, rgba(10,27,46,0.55) 0%, rgba(10,27,46,0.75) 55%, rgba(10,27,46,0.94) 100%);
+}
 .ds-hero-inner{max-width:760px; position:relative; z-index:2;}
 .ds-hero-inner h1{font-size:clamp(2.2rem,5vw,3.6rem); margin:14px 0 10px; line-height:1.1;}
 .ds-hero-sub2{font-size:1.15rem; color:var(--sea-light); font-weight:600; margin-bottom:18px;}
 .ds-hero-inner p{color:var(--text-dim); font-size:1.05rem; line-height:1.8; max-width:60ch; margin-bottom:32px;}
 .ds-hero-actions{display:flex; gap:16px; flex-wrap:wrap;}
-/* subtle "network" motif in the background, pure CSS, no image asset needed */
-.ds-hero::before{
-  content:''; position:absolute; inset:0; opacity:0.5; pointer-events:none;
-  background-image:
-    radial-gradient(circle at 15% 25%, rgba(123,179,164,0.18) 0, transparent 40%),
-    radial-gradient(circle at 85% 15%, rgba(123,179,164,0.12) 0, transparent 35%),
-    radial-gradient(circle at 75% 80%, rgba(123,179,164,0.14) 0, transparent 40%);
+@media(max-width:760px){
+  .ds-hero-bg--pc{display:none !important;}
+  .ds-hero-bg--mobile{display:block !important;}
 }
 
 .ds-solutions{background:var(--paper); padding:min(16vh,130px) clamp(20px,6vw,64px);}
