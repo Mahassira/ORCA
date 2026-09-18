@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Portal Login — ORCA Connect</title>
+<meta name="description" content="ORCA Connect Customer Portal — sign in to track shipments, monitor containers, and access documents.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="orca logo.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ PORTAL HEADER (minimal — not the marketing nav) ============ -->
+<header class="portal-header">
+  <a class="portal-header-logo" href="digital-solutions.html">
+    <img src="orca logo white.png" alt="ORCA">
+    <span class="portal-header-brand">ORCA Connect</span>
+  </a>
+  <div class="portal-header-actions">
+    <a href="digital-solutions.html">← Back to ORCA website</a>
+  </div>
+</header>
+
+<div class="portal-login-wrap">
+  <div class="portal-login-card">
+    <div class="portal-login-eyebrow">ORCA Connect</div>
+    <h1>Customer Portal</h1>
+
+    <form id="portalLoginForm" novalidate>
+      <div class="portal-field">
+        <label for="plEmail">Email / Username</label>
+        <input type="text" id="plEmail" name="email" autocomplete="username" placeholder="you@company.com">
+      </div>
+      <div class="portal-field">
+        <label for="plPassword">Password</label>
+        <input type="password" id="plPassword" name="password" autocomplete="current-password" placeholder="••••••••">
+      </div>
+      <div class="portal-row">
+        <label class="portal-remember">
+          <input type="checkbox" id="plRemember"> Remember me
+        </label>
+        <a href="mailto:info@orca-eg.com?subject=Password%20reset%20request">Forgot password?</a>
+      </div>
+      <button type="submit" class="portal-submit">Sign In</button>
+    </form>
+
+    <div class="portal-demo-note">
+      <strong>Demo Environment.</strong> ORCA Connect is currently a frontend prototype — no real account or password is required. Selecting "Sign In" opens a preview of the customer dashboard using sample data. No shipment, customer, or account information is sent, stored, or verified anywhere.
+    </div>
+
+    <div class="portal-support">
+      Need help? <a href="mailto:info@orca-eg.com">Contact ORCA Support</a>
+    </div>
+  </div>
+</div>
+
+<script src="portal-login.js"></script>
+</body>
+</html>
