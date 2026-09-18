@@ -145,6 +145,38 @@ window.ORCA_I18N = {
     oc_team_5_bio: "Shahinaz Soussa brings experience in financial management within the maritime industry, with expertise in accounts receivable, financial reporting, account reconciliation, and Microsoft Excel. Her previous experience at Maersk strengthened her capabilities in financial reporting and transparency. At ORCA, she contributes to continuous improvement and the achievement of strategic organizational objectives.",
 
     nav_locations: "Our Locations",
+    nav_digital: "Digital Solutions",
+
+    ds_page_title: "Digital Solutions — ORCA Shipping & Agencies",
+    ds_hero_eyebrow: "Digital Solutions",
+    ds_hero_headline: "Connected Logistics. Complete Visibility.",
+    ds_hero_sub: "Technology-driven solutions designed to give customers greater visibility, control and efficiency across their logistics operations.",
+    ds_cta_primary: "Access Customer Portal",
+    ds_cta_secondary: "Explore Solutions",
+
+    ds_solutions_eyebrow: "What We're Building",
+    ds_solutions_heading: "Solutions Shaping the Way You Ship",
+
+    ds_sol_1_title: "Shipment Tracking",
+    ds_sol_1_desc: "Track shipments and monitor their progress from origin to destination.",
+    ds_sol_2_title: "Container Visibility",
+    ds_sol_2_desc: "Monitor container information, shipment milestones and estimated arrival details.",
+    ds_sol_3_title: "Digital Documentation",
+    ds_sol_3_desc: "Access shipping documents and important logistics information through one centralized portal.",
+    ds_sol_4_title: "Logistics Analytics",
+    ds_sol_4_desc: "Gain visibility into shipment performance, delivery timelines and operational data.",
+
+    ds_connect_eyebrow: "ORCA Connect",
+    ds_connect_heading: "One Portal. Complete Logistics Visibility.",
+    ds_connect_desc: "ORCA Connect is designed to bring shipment tracking, documentation, status updates and logistics information into one simple customer experience.",
+    ds_connect_cap_1: "Track Shipments",
+    ds_connect_cap_2: "Monitor Containers",
+    ds_connect_cap_3: "Access Documents",
+    ds_connect_cap_4: "View Updates",
+
+    ds_footer_heading: "Ready for Smarter Logistics?",
+    ds_footer_body: "Connect with ORCA to discover how digital solutions can improve visibility and control across your logistics operations.",
+    ds_footer_btn_primary: "Contact ORCA",
 
     oc_cta_heading: "Let's Move Forward Together",
     oc_cta_sub: "Whether you are looking for shipping solutions, commercial partnerships, or logistics support, our team is ready to help.",
@@ -309,6 +341,38 @@ window.ORCA_I18N = {
     oc_team_5_bio: "تتمتع شاهيناز سوسة بخبرة في الإدارة المالية داخل صناعة الشحن البحري، مع كفاءة في الذمم المدينة والتقارير المالية والتسويات المحاسبية وبرنامج Microsoft Excel. عزّزت خبرتها السابقة لدى Maersk قدراتها في التقارير المالية والشفافية. تسهم في أوركا بتحقيق التحسين المستمر والأهداف الاستراتيجية للمؤسسة.",
 
     nav_locations: "مواقعنا",
+    nav_digital: "الحلول الرقمية",
+
+    ds_page_title: "الحلول الرقمية — أوركا للشحن والوكالات",
+    ds_hero_eyebrow: "الحلول الرقمية",
+    ds_hero_headline: "لوجستيات متصلة. رؤية كاملة.",
+    ds_hero_sub: "حلول قائمة على التكنولوجيا مصممة لمنح عملائنا رؤية أوضح وتحكمًا أكبر وكفاءة أعلى في عمليات الشحن الخاصة بهم.",
+    ds_cta_primary: "الدخول إلى بوابة العملاء",
+    ds_cta_secondary: "استكشف الحلول",
+
+    ds_solutions_eyebrow: "ما نعمل عليه",
+    ds_solutions_heading: "حلول تُعيد تشكيل طريقة شحنك",
+
+    ds_sol_1_title: "تتبع الشحنات",
+    ds_sol_1_desc: "تتبّع شحناتك وراقب تقدّمها من نقطة الانطلاق حتى الوجهة النهائية.",
+    ds_sol_2_title: "رؤية الحاويات",
+    ds_sol_2_desc: "راقب بيانات الحاوية، ومراحل الشحنة، وتفاصيل الوصول المتوقعة.",
+    ds_sol_3_title: "التوثيق الرقمي",
+    ds_sol_3_desc: "اطّلع على مستندات الشحن والمعلومات اللوجستية المهمة من خلال بوابة واحدة موحدة.",
+    ds_sol_4_title: "تحليلات لوجستية",
+    ds_sol_4_desc: "احصل على رؤية واضحة لأداء الشحنات ومواعيد التسليم والبيانات التشغيلية.",
+
+    ds_connect_eyebrow: "أوركا كونكت",
+    ds_connect_heading: "بوابة واحدة. رؤية لوجستية كاملة.",
+    ds_connect_desc: "صُممت منصة أوركا كونكت لتجمع تتبع الشحنات والتوثيق وتحديثات الحالة والمعلومات اللوجستية في تجربة واحدة بسيطة للعميل.",
+    ds_connect_cap_1: "تتبع الشحنات",
+    ds_connect_cap_2: "مراقبة الحاويات",
+    ds_connect_cap_3: "الوصول للمستندات",
+    ds_connect_cap_4: "متابعة التحديثات",
+
+    ds_footer_heading: "مستعد للوجستيات أذكى؟",
+    ds_footer_body: "تواصل مع أوركا لاكتشاف كيف يمكن للحلول الرقمية أن تحسّن الرؤية والتحكم في عمليات الشحن الخاصة بك.",
+    ds_footer_btn_primary: "تواصل مع أوركا",
 
     oc_cta_heading: "لنتقدّم معًا إلى الأمام",
     oc_cta_sub: "سواء كنت تبحث عن حلول شحن، أو شراكات تجارية، أو دعم لوجستي، فريقنا جاهز لمساعدتك.",
@@ -473,6 +537,38 @@ window.ORCA_I18N = {
     oc_team_5_bio: "沙希纳兹·苏萨在海运行业的财务管理方面拥有丰富经验，专长包括应收账款、财务报告、账目核对及 Microsoft Excel 应用。她此前在马士基的工作经历增强了她在财务报告与透明度方面的能力。在 ORCA，她致力于持续改进并推动公司战略目标的实现。",
 
     nav_locations: "我们的网点",
+    nav_digital: "数字化解决方案",
+
+    ds_page_title: "数字化解决方案 — ORCA 航运代理",
+    ds_hero_eyebrow: "数字化解决方案",
+    ds_hero_headline: "互联物流。全程可视。",
+    ds_hero_sub: "以技术驱动的解决方案，为客户在物流运营中带来更高的可视性、掌控力与效率。",
+    ds_cta_primary: "进入客户门户",
+    ds_cta_secondary: "探索解决方案",
+
+    ds_solutions_eyebrow: "我们正在构建",
+    ds_solutions_heading: "重塑您的货运方式的解决方案",
+
+    ds_sol_1_title: "货物追踪",
+    ds_sol_1_desc: "追踪货物并监控其从起点到目的地的全程进度。",
+    ds_sol_2_title: "集装箱可视化",
+    ds_sol_2_desc: "监控集装箱信息、货运里程碑及预计到达时间。",
+    ds_sol_3_title: "数字化单据",
+    ds_sol_3_desc: "通过统一门户获取运输单据及重要物流信息。",
+    ds_sol_4_title: "物流分析",
+    ds_sol_4_desc: "清晰掌握货运表现、交付时间及运营数据。",
+
+    ds_connect_eyebrow: "ORCA Connect",
+    ds_connect_heading: "一个门户，完整的物流可视性。",
+    ds_connect_desc: "ORCA Connect 旨在将货物追踪、单据管理、状态更新及物流信息整合进一个简单的客户体验中。",
+    ds_connect_cap_1: "追踪货物",
+    ds_connect_cap_2: "监控集装箱",
+    ds_connect_cap_3: "获取单据",
+    ds_connect_cap_4: "查看更新",
+
+    ds_footer_heading: "准备好迈向更智能的物流了吗？",
+    ds_footer_body: "联系 ORCA，了解数字化解决方案如何提升您物流运营的可视性与掌控力。",
+    ds_footer_btn_primary: "联系 ORCA",
 
     oc_cta_heading: "让我们携手共创未来",
     oc_cta_sub: "无论您需要航运解决方案、商业合作，还是物流支持，我们的团队随时为您提供帮助。",
