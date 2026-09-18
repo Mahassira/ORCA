@@ -6,7 +6,6 @@
 <title data-i18n="loc_page_title">Our Locations — ORCA Shipping & Agencies</title>
 <meta name="description" content="ORCA Shipping and Agencies — head office in New Cairo and port operations in Alexandria, Damietta, and Ain Sokhna.">
 <link rel="icon" href="orca logo.svg">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
   /* Critical splash-screen CSS, inlined so it paints instantly — before the
      external stylesheet finishes loading. Without this, slower connections
@@ -82,7 +81,8 @@
 
 <!-- ============ MAP ============ -->
 <section class="loc-map-section">
-  <div id="orcaMap" class="loc-map" role="application" aria-label="Map of ORCA Shipping and Agencies locations"></div>
+  <img class="loc-map-img loc-map-img--pc" src="ORCAMAPPC.png" alt="Map of Egypt showing ORCA's operational presence: Head Office in New Cairo, Alexandria Port, Damietta branch office, and Sokhna branch office, each with their department listings">
+  <img class="loc-map-img loc-map-img--mobile" src="ORCAMAPMOBILE.png" alt="Map of Egypt showing ORCA's operational presence: Head Office in New Cairo, Alexandria Port, Damietta branch office, and Sokhna branch office, each with their department listings">
 </section>
 
 <!-- ============ LOCATION LIST (also serves as a no-JS fallback) ============ -->
@@ -153,7 +153,6 @@
   </div>
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="i18n.js"></script>
