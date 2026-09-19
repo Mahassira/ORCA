@@ -67,7 +67,6 @@
 
     renderKpis();
     refreshMapPopups();
-    if(selectedLocation) renderInfoPanel(selectedLocation);
   }
 
   document.querySelectorAll('.lang-btn').forEach(function(btn){
@@ -100,22 +99,7 @@
     }).join('');
   }
 
-  /* ---------------- Info panel ---------------- */
-  var selectedLocation = null;
-
-  function renderInfoPanel(loc){
-    var panel = document.getElementById('locInfoPanel');
-    if(!panel) return;
-    selectedLocation = loc;
-    var d = dict();
-    var idx = LOCATIONS.indexOf(loc) + 1;
-    var typeLabel = loc.type === 'hq' ? (d.loc_kpi_hq || 'Head Office') : (d.loc_kpi_ports || 'Port');
-    document.getElementById('locInfoN').textContent = String(idx).padStart(2, '0');
-    document.getElementById('locInfoName').textContent = d[loc.nameKey] || loc.nameKey;
-    document.getElementById('locInfoType').textContent = typeLabel;
-    document.getElementById('locInfoDesc').textContent = d[loc.descKey] || '';
-    panel.hidden = false;
-  }
+  /* ---------------- Marker popup content ---------------- */
 
   function popupHTML(loc){
     var d = dict();
@@ -130,27 +114,33 @@
     });
   }
 
-  /* ---------------- Map (lazy-initialized when scrolled into view) ---------------- */
+  /* ---------------- Map (lazy-initialized when scrolled into view) ----------------
+     The map is intentionally locked: no zoom, no drag/pan, no zoom control
+     buttons. Its only interaction is clicking/tapping a marker for details,
+     shown in that marker's own popup — nothing else on the map responds to
+     input, so there's no zoom/pan gesture to accidentally trigger on mobile. */
   function initMap(){
     if(map) return;
     var el = document.getElementById('orcaMap');
     if(!el || !window.L) return;
 
     map = L.map('orcaMap', {
-      scrollWheelZoom: false,
       center: [30.6, 31.6],
-      zoom: 6
+      zoom: 6,
+      zoomControl: false,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      boxZoom: false,
+      touchZoom: false,
+      keyboard: false,
+      tap: true
     });
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       maxZoom: 19
     }).addTo(map);
-
-    // Scroll-zoom only turns on after the user clicks in, so an ordinary
-    // page scroll doesn't get captured by the map underneath — important
-    // on mobile especially.
-    map.on('click', function(){ map.scrollWheelZoom.enable(); });
 
     var bounds = [];
     LOCATIONS.forEach(function(loc){
@@ -162,9 +152,8 @@
         fillOpacity: 0.9
       }).addTo(map);
       marker.bindPopup(popupHTML(loc));
-      marker.on('click', function(){ renderInfoPanel(loc); });
-      // Desktop hover preview; harmless no-op on touch devices, which use
-      // the click/tap handler above instead.
+      // Desktop hover preview in addition to the click/tap that opens the
+      // popup on every device (bindPopup already wires that up by default).
       marker.on('mouseover', function(){ marker.openPopup(); });
       mapMarkers.push({ marker: marker, data: loc });
       bounds.push([loc.lat, loc.lng]);
