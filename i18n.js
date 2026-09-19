@@ -85,7 +85,7 @@ window.ORCA_I18N = {
 
     cta_heading: "Ready to move what matters",
 
-    footer_address: "1th floor Enawalks Mall,<br>5th settlement, New Cairo, Egypt",
+    footer_address: "1st floor Enawalks Mall,<br>5th settlement, New Cairo, Egypt",
     footer_contact_heading: "Contact",
     footer_quicklinks_heading: "Quick Links",
     footer_copyright: "© 2026 ORCA Shipping And Agencies. All rights reserved.",
