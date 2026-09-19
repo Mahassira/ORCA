@@ -6,52 +6,9 @@
 <title data-i18n="page_title">ORCA Shipping & Agencies — Global Shipping, Experienced Through Motion</title>
 <meta name="description" content="ORCA Shipping And Agencies — official agent for renowned shipping lines, delivering trust, reliability, and innovation in global shipping across Egypt and the Suez Canal.">
 <link rel="icon" href="orca logo.svg">
-<style>
-  /* Critical splash-screen CSS, inlined so it paints instantly — before the
-     external stylesheet finishes loading. Without this, slower connections
-     (mostly mobile) briefly show the raw unstyled page: white background,
-     white logo on white = invisible logo flash in the header area. */
-  .splash-screen{position:fixed;inset:0;z-index:9999;background:#0A1B2E;display:flex;align-items:center;justify-content:center;pointer-events:none;animation:splashAutoHide 1.5s ease forwards;}
-  @keyframes splashAutoHide{0%,60%{opacity:1;visibility:visible;}100%{opacity:0;visibility:hidden;}}
-  .splash-screen.is-hidden{opacity:0;visibility:hidden;}
-  .splash-logo{width:110px;height:auto;}
-</style>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="splash-screen" id="splashScreen">
-  <img class="splash-logo" src="orca logo white.png" alt="ORCA Shipping and Agencies">
-</div>
-<script>
-  (function(){
-    var el = document.getElementById('splashScreen');
-    if(!el) return;
-
-    // Show the splash only on the very first page of a browsing session,
-    // or on an actual reload — not on every internal link click between
-    // Home / Services / Our Company, which would feel repetitive.
-    var navType = 'navigate';
-    try{
-      var entries = performance.getEntriesByType('navigation');
-      if(entries && entries.length) navType = entries[0].type;
-    }catch(e){}
-
-    var alreadyShown = false;
-    try{ alreadyShown = sessionStorage.getItem('orca_splash_shown') === '1'; }catch(e){}
-
-    if(alreadyShown && navType !== 'reload'){
-      el.style.display = 'none';
-      return;
-    }
-    try{ sessionStorage.setItem('orca_splash_shown', '1'); }catch(e){}
-
-    setTimeout(function(){
-      el.classList.add('is-hidden');
-      setTimeout(function(){ if(el && el.parentNode) el.remove(); }, 450);
-    }, 850);
-  })();
-</script>
 
 <!-- ============ NAV ============ -->
 <nav class="site-nav" id="siteNav">
