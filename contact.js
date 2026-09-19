@@ -4,7 +4,7 @@
    plus the new general-inquiry Contact form submit handler.
 
    This form is technically separate from the homepage's quotation
-   form (#quoteForm in main.js): its own fields, its own element
+   form (#quoteForm in js/main.js): its own fields, its own element
    IDs, its own submit handler below. Nothing here reads from or
    writes to the quote form's state, and nothing in main.js touches
    this one.
@@ -40,6 +40,10 @@
         if(key === 'footer_address'){ el.innerHTML = dict[key]; }
         else { el.textContent = dict[key]; }
       }
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-placeholder');
+      if(dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
     });
     document.querySelectorAll('.lang-btn').forEach(function(btn){
       btn.classList.toggle('is-active', btn.dataset.lang === lang);
@@ -112,7 +116,10 @@
       var body = encodeURIComponent(bodyLines.join('\n'));
 
       window.location.href = 'mailto:info@orca-eg.com?subject=' + subject + '&body=' + body;
-      if(cfStatus) cfStatus.textContent = 'Opening your email client to send this message…';
+      if(cfStatus){
+        var dict = window.ORCA_I18N[currentLang] || {};
+        cfStatus.textContent = dict.contact_status_sending || 'Opening your email client to send this message…';
+      }
     });
   }
 })();
