@@ -201,7 +201,26 @@ window.ORCA_I18N = {
     loc_kpi_locations: "Locations",
     loc_kpi_countries: "Countries",
     loc_kpi_ports: "Ports",
-    loc_kpi_hq: "Head Offices"
+    loc_kpi_hq: "Head Offices",
+
+    contact_field_service: "Service *",
+    contact_option_placeholder: "Select a service",
+    contact_option_general: "General Inquiry",
+    contact_option_shipping: "Shipping & Agency",
+    contact_option_logistics: "Logistics",
+    contact_option_commercial: "Commercial",
+    contact_option_digital: "Digital Solutions",
+    contact_option_other: "Other",
+    contact_field_name: "Name *",
+    contact_placeholder_name: "Full name",
+    contact_field_company: "Company",
+    contact_placeholder_company: "Company name",
+    contact_field_phone: "Phone *",
+    contact_field_email: "Email *",
+    contact_field_message: "Message",
+    contact_placeholder_message: "How can we help?",
+    contact_send_btn: "Send Message",
+    contact_status_sending: "Opening your email client to send this message…"
   },
 
   ar: {
@@ -402,6 +421,25 @@ window.ORCA_I18N = {
     loc_kpi_locations: "المواقع",
     loc_kpi_countries: "الدول",
     loc_kpi_ports: "الموانئ",
-    loc_kpi_hq: "المقرات الرئيسية"
+    loc_kpi_hq: "المقرات الرئيسية",
+
+    contact_field_service: "الخدمة *",
+    contact_option_placeholder: "اختر الخدمة",
+    contact_option_general: "استفسار عام",
+    contact_option_shipping: "الشحن والوكالة",
+    contact_option_logistics: "اللوجستيات",
+    contact_option_commercial: "تجاري",
+    contact_option_digital: "الحلول الرقمية",
+    contact_option_other: "أخرى",
+    contact_field_name: "الاسم *",
+    contact_placeholder_name: "الاسم الكامل",
+    contact_field_company: "الشركة",
+    contact_placeholder_company: "اسم الشركة",
+    contact_field_phone: "الهاتف *",
+    contact_field_email: "البريد الإلكتروني *",
+    contact_field_message: "الرسالة",
+    contact_placeholder_message: "إزاي نقدر نساعدك؟",
+    contact_send_btn: "إرسال الرسالة",
+    contact_status_sending: "جاري فتح برنامج البريد الإلكتروني لإرسال هذه الرسالة…"
   }
 };
