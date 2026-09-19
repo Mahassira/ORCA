@@ -66,12 +66,12 @@
     if(typeof refreshContainerHint === 'function' && containerHint) refreshContainerHint();
   }
 
-  var langSwitch = document.getElementById('langSwitch');
-  if(langSwitch){
-    langSwitch.querySelectorAll('.lang-btn').forEach(function(btn){
-      btn.addEventListener('click', function(){ applyLanguage(btn.dataset.lang); });
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyLanguage(btn.dataset.lang);
+      if(typeof navLinks !== 'undefined' && navLinks.classList.contains('open')) closeMobileNav();
     });
-  }
+  });
 
   /* ---------------- NAV ---------------- */
   var nav = document.getElementById('siteNav');
@@ -160,7 +160,8 @@
     });
   }
 
-  applyLanguage(getSavedLang() || 'en');
+  var savedLang = getSavedLang();
+  applyLanguage((savedLang && window.ORCA_I18N[savedLang]) ? savedLang : 'en');
 
   /* ---------------- ANIMATED STAT COUNTERS (always active) ---------------- */
   function initStatCounters(){
