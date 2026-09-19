@@ -864,3 +864,69 @@ html[dir="rtl"] .oc-about-inner{text-align:right;}
 
 /* Hero CTA buttons (Home page) */
 .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:28px; position:relative; z-index:3;}
+
+/* ============================================================
+   AI ASSISTANT WIDGET — rule-based, frontend-only chat helper.
+   No API key, no backend: keyword matching only, routing visitors
+   to the right existing page/section.
+   ============================================================ */
+.orca-assist-fab{
+  position:fixed; bottom:22px; inset-inline-end:22px; z-index:9500;
+  width:56px; height:56px; border-radius:50%; background:var(--sea);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 24px -8px rgba(10,27,46,0.5); border:none; cursor:pointer;
+  transition:transform .2s ease, background .2s ease;
+}
+.orca-assist-fab:hover{background:var(--sea-light); transform:scale(1.06);}
+.orca-assist-fab svg{width:24px; height:24px; color:#fff;}
+.orca-assist-fab .close-icon{display:none;}
+.orca-assist-fab.is-open .chat-icon{display:none;}
+.orca-assist-fab.is-open .close-icon{display:block;}
+
+.orca-assist-panel{
+  position:fixed; bottom:90px; inset-inline-end:22px; z-index:9500;
+  width:min(340px, calc(100vw - 40px)); max-height:min(480px, calc(100vh - 140px));
+  background:var(--navy-deep); border:1px solid var(--line); border-radius:8px;
+  display:flex; flex-direction:column; overflow:hidden;
+  opacity:0; visibility:hidden; transform:translateY(12px);
+  transition:opacity .25s ease, transform .25s ease, visibility .25s;
+  box-shadow:0 20px 50px -12px rgba(0,0,0,0.5);
+}
+.orca-assist-panel.is-open{opacity:1; visibility:visible; transform:translateY(0);}
+
+.orca-assist-head{
+  padding:16px 18px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:10px;
+}
+.orca-assist-head img{height:20px; width:auto;}
+.orca-assist-head span{color:#fff; font-family:'Fraunces',serif; font-size:0.95rem; font-weight:700;}
+
+.orca-assist-body{flex:1; overflow-y:auto; padding:16px 18px; display:flex; flex-direction:column; gap:12px;}
+.orca-assist-msg{max-width:88%; font-size:0.86rem; line-height:1.6; padding:10px 13px; border-radius:6px;}
+.orca-assist-msg--bot{background:rgba(255,255,255,0.06); color:var(--text-dim); align-self:flex-start; border-start-start-radius:2px;}
+.orca-assist-msg--user{background:var(--sea); color:#fff; align-self:flex-end; border-start-end-radius:2px;}
+.orca-assist-msg a{color:var(--sea-light); font-weight:600; text-decoration:underline;}
+
+.orca-assist-chips{display:flex; flex-wrap:wrap; gap:8px; padding:0 18px 14px;}
+.orca-assist-chip{
+  font-size:0.78rem; color:var(--sea-light); border:1px solid rgba(123,179,164,0.35);
+  padding:6px 12px; border-radius:20px; background:rgba(123,179,164,0.06); cursor:pointer;
+  transition:background .2s;
+}
+.orca-assist-chip:hover{background:rgba(123,179,164,0.16);}
+
+.orca-assist-input-row{display:flex; gap:8px; padding:14px 18px; border-top:1px solid var(--line);}
+.orca-assist-input-row input{
+  flex:1; background:rgba(255,255,255,0.05); border:1px solid var(--line); border-radius:4px;
+  padding:9px 12px; color:#fff; font-size:0.85rem; font-family:inherit;
+}
+.orca-assist-input-row input:focus{outline:none; border-color:var(--sea-light);}
+.orca-assist-send{
+  width:38px; height:38px; border-radius:4px; background:var(--sea); border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; flex:none;
+}
+.orca-assist-send svg{width:16px; height:16px; color:#fff;}
+
+@media(max-width:480px){
+  .orca-assist-panel{inset-inline:16px; bottom:86px; width:auto;}
+  .orca-assist-fab{bottom:16px; inset-inline-end:16px;}
+}
