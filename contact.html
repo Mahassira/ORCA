@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="nav_contact">Contact Us — ORCA Shipping & Agencies</title>
+<meta name="description" content="Contact ORCA Shipping and Agencies for general inquiries, shipping, logistics, commercial, or digital solutions questions.">
+<link rel="icon" href="orca logo.svg">
+<style>
+  .splash-screen{position:fixed;inset:0;z-index:9999;background:#0A1B2E;display:flex;align-items:center;justify-content:center;pointer-events:none;animation:splashAutoHide 1.5s ease forwards;}
+  @keyframes splashAutoHide{0%,60%{opacity:1;visibility:visible;}100%{opacity:0;visibility:hidden;}}
+  .splash-screen.is-hidden{opacity:0;visibility:hidden;}
+  .splash-logo{width:110px;height:auto;}
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="splash-screen" id="splashScreen">
+  <img class="splash-logo" src="orca logo white.png" alt="ORCA Shipping and Agencies">
+</div>
+<script>
+  (function(){
+    var el = document.getElementById('splashScreen');
+    if(!el) return;
+    var navType = 'navigate';
+    try{
+      var entries = performance.getEntriesByType('navigation');
+      if(entries && entries.length) navType = entries[0].type;
+    }catch(e){}
+    var alreadyShown = false;
+    try{ alreadyShown = sessionStorage.getItem('orca_splash_shown') === '1'; }catch(e){}
+    if(alreadyShown && navType !== 'reload'){
+      el.style.display = 'none';
+      return;
+    }
+    try{ sessionStorage.setItem('orca_splash_shown', '1'); }catch(e){}
+    setTimeout(function(){
+      el.classList.add('is-hidden');
+      setTimeout(function(){ if(el && el.parentNode) el.remove(); }, 450);
+    }, 850);
+  })();
+</script>
+
+<!-- ============ NAV ============ -->
+<nav class="site-nav is-solid" id="siteNav">
+  <a class="nav-logo" href="index.html#top" aria-label="ORCA Shipping and Agencies — Home">
+    <img src="orca logo white.png" alt="ORCA Shipping and Agencies">
+  </a>
+  <div class="nav-links" id="navLinks">
+    <img class="nav-links-logo" src="orca logo white.png" alt="ORCA Shipping and Agencies">
+    <a href="index.html#top" data-i18n="nav_home">Home</a>
+    <a href="services.html" data-i18n="nav_services">Services & Logistics</a>
+    <a href="digital-solutions.html" data-i18n="nav_digital">Digital Solutions</a>
+    <a href="our company.html" data-i18n="nav_about">Our Company</a>
+    <a href="locations.html" data-i18n="nav_locations">Our Locations</a>
+    <a href="contact.html" data-i18n="nav_contact">Contact Us</a>
+    <a class="nav-cta-mobile" href="index.html#quote" data-i18n="quote_cta">Get a Quotation</a>
+  </div>
+  <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+    <button type="button" data-lang="en" class="lang-btn is-active">EN</button>
+    <button type="button" data-lang="ar" class="lang-btn">AR</button>
+  </div>
+  <a class="nav-cta" href="index.html#quote" data-i18n="quote_cta">Get a Quotation</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============ HEADER ============ -->
+<section class="loc-header">
+  <div class="loc-header-inner">
+    <h1 data-i18n="nav_contact">Contact Us</h1>
+  </div>
+</section>
+
+<!-- ============ CONTACT FORM ============
+     A separate form from the quotation form (#quote on the homepage): different
+     purpose (general inquiries, not pricing), different fields, different
+     submit handler (contact.js), no shared state with quoteForm. -->
+<section class="quote" id="contactFormSection">
+  <form class="quote-form" id="contactForm" novalidate>
+    <div class="qf-field qf-field--full">
+      <label for="cfService">Service *</label>
+      <select id="cfService" name="service" required>
+        <option value="" disabled selected>Select a service</option>
+        <option value="General Inquiry">General Inquiry</option>
+        <option value="Shipping & Agency">Shipping & Agency</option>
+        <option value="Logistics">Logistics</option>
+        <option value="Commercial">Commercial</option>
+        <option value="Digital Solutions">Digital Solutions</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="qf-row">
+      <div class="qf-field">
+        <label for="cfName">Name *</label>
+        <input type="text" id="cfName" name="name" placeholder="Full name" required>
+      </div>
+      <div class="qf-field">
+        <label for="cfCompany">Company</label>
+        <input type="text" id="cfCompany" name="company" placeholder="Company name">
+      </div>
+    </div>
+
+    <div class="qf-row">
+      <div class="qf-field">
+        <label for="cfPhone">Phone *</label>
+        <input type="tel" id="cfPhone" name="phone" placeholder="+20 ..." required>
+      </div>
+      <div class="qf-field">
+        <label for="cfEmail">Email *</label>
+        <input type="email" id="cfEmail" name="email" placeholder="you@company.com" required>
+      </div>
+    </div>
+
+    <div class="qf-field qf-field--full">
+      <label for="cfMessage">Message</label>
+      <textarea id="cfMessage" name="message" rows="3" placeholder="How can we help?"></textarea>
+    </div>
+
+    <div class="qf-actions">
+      <button type="submit" class="btn-primary btn-submit">Send Message</button>
+      <span class="qf-status" id="cfStatus" role="status" aria-live="polite"></span>
+    </div>
+  </form>
+
+  <!-- Existing verified ORCA contact information (same values as the footer) -->
+  <div class="contact-info">
+    <div class="contact-info-item">
+      <span class="lbl" data-i18n="footer_contact_heading">Contact</span>
+      <a href="mailto:info@orca-eg.com" dir="ltr">info@orca-eg.com</a>
+      <a href="tel:+20226330247" dir="ltr">+2 02 63 30 2047</a>
+    </div>
+    <div class="contact-info-item">
+      <span class="lbl">ORCA Shipping & Agencies</span>
+      <span data-i18n="footer_address">1th floor Enawalks Mall,<br>5th settlement, New Cairo, Egypt</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>ORCA Shipping & Agencies</h4>
+      <div data-i18n="footer_address">1th floor Enawalks Mall,<br>5th settlement, New Cairo, Egypt</div>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_contact_heading">Contact</h4>
+      <a href="mailto:info@orca-eg.com" dir="ltr">info@orca-eg.com</a>
+      <a href="tel:+20226330247" dir="ltr">+2 02 63 30 2047</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_quicklinks_heading">Quick Links</h4>
+      <a href="index.html#top" data-i18n="nav_home">Home</a>
+      <a href="services.html" data-i18n="nav_services">Services & Logistics</a>
+      <a href="digital-solutions.html" data-i18n="nav_digital">Digital Solutions</a>
+      <a href="our company.html" data-i18n="nav_about">Our Company</a>
+      <a href="locations.html" data-i18n="nav_locations">Our Locations</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div data-i18n="footer_copyright">© 2026 ORCA Shipping And Agencies. All rights reserved.</div>
+    <div data-i18n="footer_location">NEW CAIRO — EGYPT</div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="contact.js"></script>
+</body>
+</html>
