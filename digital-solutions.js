@@ -83,7 +83,8 @@
     a.addEventListener('click', closeMobileNav);
   });
 
-  applyLanguage(getSavedLang() || 'en');
+  var savedLang = getSavedLang();
+  applyLanguage((savedLang && window.ORCA_I18N[savedLang]) ? savedLang : 'en');
 
   /* ---------------- SIMPLE SCROLL REVEALS ---------------- */
   if(!prefersReduced && window.gsap && window.ScrollTrigger){
