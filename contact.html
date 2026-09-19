@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="nav_contact">Contact Us — ORCA Shipping & Agencies</title>
 <meta name="description" content="Contact ORCA Shipping and Agencies for general inquiries, shipping, logistics, commercial, or digital solutions questions.">
-<link rel="icon" href="orca logo.svg">
+<link rel="icon" href="orca-logo.svg">
 <style>
   .splash-screen{position:fixed;inset:0;z-index:9999;background:#0A1B2E;display:flex;align-items:center;justify-content:center;pointer-events:none;animation:splashAutoHide 1.5s ease forwards;}
   @keyframes splashAutoHide{0%,60%{opacity:1;visibility:visible;}100%{opacity:0;visibility:hidden;}}
@@ -17,7 +17,7 @@
 <body>
 
 <div class="splash-screen" id="splashScreen">
-  <img class="splash-logo" src="orca logo white.png" alt="ORCA Shipping and Agencies">
+  <img class="splash-logo" src="orca-logo-white.png" alt="ORCA Shipping and Agencies">
 </div>
 <script>
   (function(){
@@ -45,14 +45,14 @@
 <!-- ============ NAV ============ -->
 <nav class="site-nav is-solid" id="siteNav">
   <a class="nav-logo" href="index.html#top" aria-label="ORCA Shipping and Agencies — Home">
-    <img src="orca logo white.png" alt="ORCA Shipping and Agencies">
+    <img src="orca-logo-white.png" alt="ORCA Shipping and Agencies">
   </a>
   <div class="nav-links" id="navLinks">
-    <img class="nav-links-logo" src="orca logo white.png" alt="ORCA Shipping and Agencies">
+    <img class="nav-links-logo" src="orca-logo-white.png" alt="ORCA Shipping and Agencies">
     <a href="index.html#top" data-i18n="nav_home">Home</a>
     <a href="services.html" data-i18n="nav_services">Services & Logistics</a>
     <a href="digital-solutions.html" data-i18n="nav_digital">Digital Solutions</a>
-    <a href="our company.html" data-i18n="nav_about">Our Company</a>
+    <a href="our-company.html" data-i18n="nav_about">Our Company</a>
     <a href="locations.html" data-i18n="nav_locations">Our Locations</a>
     <a href="contact.html" data-i18n="nav_contact">Contact Us</a>
     <a class="nav-cta-mobile" href="index.html#quote" data-i18n="quote_cta">Get a Quotation</a>
@@ -81,47 +81,47 @@
 <section class="quote" id="contactFormSection">
   <form class="quote-form" id="contactForm" novalidate>
     <div class="qf-field qf-field--full">
-      <label for="cfService">Service *</label>
+      <label for="cfService" data-i18n="contact_field_service">Service *</label>
       <select id="cfService" name="service" required>
-        <option value="" disabled selected>Select a service</option>
-        <option value="General Inquiry">General Inquiry</option>
-        <option value="Shipping & Agency">Shipping & Agency</option>
-        <option value="Logistics">Logistics</option>
-        <option value="Commercial">Commercial</option>
-        <option value="Digital Solutions">Digital Solutions</option>
-        <option value="Other">Other</option>
+        <option value="" disabled selected data-i18n="contact_option_placeholder">Select a service</option>
+        <option value="General Inquiry" data-i18n="contact_option_general">General Inquiry</option>
+        <option value="Shipping & Agency" data-i18n="contact_option_shipping">Shipping & Agency</option>
+        <option value="Logistics" data-i18n="contact_option_logistics">Logistics</option>
+        <option value="Commercial" data-i18n="contact_option_commercial">Commercial</option>
+        <option value="Digital Solutions" data-i18n="contact_option_digital">Digital Solutions</option>
+        <option value="Other" data-i18n="contact_option_other">Other</option>
       </select>
     </div>
 
     <div class="qf-row">
       <div class="qf-field">
-        <label for="cfName">Name *</label>
-        <input type="text" id="cfName" name="name" placeholder="Full name" required>
+        <label for="cfName" data-i18n="contact_field_name">Name *</label>
+        <input type="text" id="cfName" name="name" placeholder="Full name" data-i18n-placeholder="contact_placeholder_name" required>
       </div>
       <div class="qf-field">
-        <label for="cfCompany">Company</label>
-        <input type="text" id="cfCompany" name="company" placeholder="Company name">
+        <label for="cfCompany" data-i18n="contact_field_company">Company</label>
+        <input type="text" id="cfCompany" name="company" placeholder="Company name" data-i18n-placeholder="contact_placeholder_company">
       </div>
     </div>
 
     <div class="qf-row">
       <div class="qf-field">
-        <label for="cfPhone">Phone *</label>
+        <label for="cfPhone" data-i18n="contact_field_phone">Phone *</label>
         <input type="tel" id="cfPhone" name="phone" placeholder="+20 ..." required>
       </div>
       <div class="qf-field">
-        <label for="cfEmail">Email *</label>
+        <label for="cfEmail" data-i18n="contact_field_email">Email *</label>
         <input type="email" id="cfEmail" name="email" placeholder="you@company.com" required>
       </div>
     </div>
 
     <div class="qf-field qf-field--full">
-      <label for="cfMessage">Message</label>
-      <textarea id="cfMessage" name="message" rows="3" placeholder="How can we help?"></textarea>
+      <label for="cfMessage" data-i18n="contact_field_message">Message</label>
+      <textarea id="cfMessage" name="message" rows="3" placeholder="How can we help?" data-i18n-placeholder="contact_placeholder_message"></textarea>
     </div>
 
     <div class="qf-actions">
-      <button type="submit" class="btn-primary btn-submit">Send Message</button>
+      <button type="submit" class="btn-primary btn-submit" data-i18n="contact_send_btn">Send Message</button>
       <span class="qf-status" id="cfStatus" role="status" aria-live="polite"></span>
     </div>
   </form>
@@ -157,7 +157,7 @@
       <a href="index.html#top" data-i18n="nav_home">Home</a>
       <a href="services.html" data-i18n="nav_services">Services & Logistics</a>
       <a href="digital-solutions.html" data-i18n="nav_digital">Digital Solutions</a>
-      <a href="our company.html" data-i18n="nav_about">Our Company</a>
+      <a href="our-company.html" data-i18n="nav_about">Our Company</a>
       <a href="locations.html" data-i18n="nav_locations">Our Locations</a>
     </div>
   </div>
