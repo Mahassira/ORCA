@@ -2,8 +2,9 @@
    ORCA Assistant — rule-based visitor helper, no AI/API involved.
    Matches simple keywords and routes to the right existing page
    or section. Fully self-contained: works on any page it's
-   included on, reads the site's saved language (orca_lang) so its
-   replies match whatever language the visitor is already using.
+   included on, and stays in sync with the site's language switch
+   (EN/AR buttons) even when the visitor changes language without
+   reloading the page.
    ============================================================ */
 (function(){
   "use strict";
@@ -11,8 +12,7 @@
   function getLang(){
     try{ return localStorage.getItem('orca_lang') || 'en'; }catch(e){ return 'en'; }
   }
-  var lang = getLang();
-  var isAr = lang === 'ar';
+  var isAr = getLang() === 'ar';
 
   var T = {
     en: {
@@ -30,9 +30,9 @@
       fallback: 'أقدر أساعدك في: عروض الأسعار، تتبع الشحنات، خدماتنا، مواقعنا، أو بيانات التواصل. تقدر كمان <a href="contact.html">تتواصل مع فريقنا مباشرة</a>.'
     }
   };
-  var t = T[isAr ? 'ar' : 'en'];
+  function t(){ return T[isAr ? 'ar' : 'en']; }
 
-  /* ---------------- Rules: keyword -> {en, ar, href} ---------------- */
+  /* ---------------- Rules: keyword -> {en, ar} ---------------- */
   var RULES = [
     {
       kws: ['quote','price','cost','pricing','rate','estimate','عرض سعر','سعر','تسعير'],
@@ -61,8 +61,8 @@
     },
     {
       kws: ['about','company','who are you','history','team','نبذة','شركة','فريق','عن الشركة'],
-      en: 'Learn more about us on the <a href="our company.html">Our Company</a> page.',
-      ar: 'تقدر تعرف أكتر عننا في صفحة <a href="our company.html">عن الشركة</a>.'
+      en: 'Learn more about us on the <a href="our-company.html">Our Company</a> page.',
+      ar: 'تقدر تعرف أكتر عننا في صفحة <a href="our-company.html">عن الشركة</a>.'
     },
     {
       kws: ['hi','hello','hey','مرحبا','اهلا','أهلا','السلام عليكم'],
@@ -81,13 +81,12 @@
         }
       }
     }
-    return t.fallback;
+    return t().fallback;
   }
 
   /* ---------------- Build the widget ---------------- */
   var fab = document.createElement('button');
   fab.className = 'orca-assist-fab';
-  fab.setAttribute('aria-label', t.title);
   fab.innerHTML =
     '<svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>' +
     '<svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>';
@@ -96,13 +95,13 @@
   panel.className = 'orca-assist-panel';
   panel.innerHTML =
     '<div class="orca-assist-head">' +
-      '<img src="orca logo white.png" alt="">' +
-      '<span>' + t.title + '</span>' +
+      '<img src="orca-logo-white.png" alt="">' +
+      '<span id="orcaAssistTitle"></span>' +
     '</div>' +
     '<div class="orca-assist-body" id="orcaAssistBody"></div>' +
     '<div class="orca-assist-chips" id="orcaAssistChips"></div>' +
     '<div class="orca-assist-input-row">' +
-      '<input type="text" id="orcaAssistInput" placeholder="' + t.placeholder + '">' +
+      '<input type="text" id="orcaAssistInput">' +
       '<button class="orca-assist-send" id="orcaAssistSend" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>' +
     '</div>';
 
@@ -114,7 +113,9 @@
     var chipsEl = document.getElementById('orcaAssistChips');
     var input = document.getElementById('orcaAssistInput');
     var sendBtn = document.getElementById('orcaAssistSend');
+    var titleEl = document.getElementById('orcaAssistTitle');
     var opened = false;
+    var greeted = false;
 
     function addMsg(html, who){
       var div = document.createElement('div');
@@ -129,21 +130,51 @@
       setTimeout(function(){ addMsg(reply(text), 'bot'); }, 300);
     }
 
-    t.chips.forEach(function(label){
-      var chip = document.createElement('button');
-      chip.type = 'button';
-      chip.className = 'orca-assist-chip';
-      chip.textContent = label;
-      chip.addEventListener('click', function(){ handle(label); });
-      chipsEl.appendChild(chip);
+    function renderChips(){
+      chipsEl.innerHTML = '';
+      t().chips.forEach(function(label){
+        var chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'orca-assist-chip';
+        chip.textContent = label;
+        chip.addEventListener('click', function(){ handle(label); });
+        chipsEl.appendChild(chip);
+      });
+    }
+
+    // Re-applies every piece of the widget's own UI text (title, chips,
+    // input placeholder, aria-label) to whatever language is now active —
+    // called on load and again every time a language button is clicked,
+    // so switching language on the same page updates the assistant too.
+    function refreshLanguage(){
+      isAr = getLang() === 'ar';
+      fab.setAttribute('aria-label', t().title);
+      titleEl.textContent = t().title;
+      input.setAttribute('placeholder', t().placeholder);
+      renderChips();
+    }
+
+    refreshLanguage();
+
+    // The site's own language buttons (EN/AR) already exist on every page;
+    // this just adds one more listener alongside whatever the page's main
+    // script already does with them — it doesn't replace or interfere with
+    // that logic, it only keeps the assistant's own text in sync.
+    document.querySelectorAll('.lang-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        // Wait a tick so the page's own click handler (which writes the
+        // new language to localStorage) runs first.
+        setTimeout(refreshLanguage, 0);
+      });
     });
 
     fab.addEventListener('click', function(){
       opened = !opened;
       fab.classList.toggle('is-open', opened);
       panel.classList.toggle('is-open', opened);
-      if(opened && !body.hasChildNodes()){
-        addMsg(t.greeting, 'bot');
+      if(opened && !greeted){
+        addMsg(t().greeting, 'bot');
+        greeted = true;
       }
     });
 
