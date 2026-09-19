@@ -42,13 +42,14 @@
     });
   }
 
-  var langSwitch = document.getElementById('langSwitch');
-  if(langSwitch){
-    langSwitch.querySelectorAll('.lang-btn').forEach(function(btn){
-      btn.addEventListener('click', function(){ applyLanguage(btn.dataset.lang); });
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyLanguage(btn.dataset.lang);
+      if(typeof navLinks !== 'undefined' && navLinks.classList.contains('open')) closeMobileNav();
     });
-  }
-  applyLanguage(getSavedLang() || 'en');
+  });
+  var savedLang = getSavedLang();
+  applyLanguage((savedLang && window.ORCA_I18N[savedLang]) ? savedLang : 'en');
 
   /* ---------------- NAV ---------------- */
   var nav = document.getElementById('siteNav');
