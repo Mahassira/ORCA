@@ -6,6 +6,7 @@
 <title data-i18n="loc_page_title">Our Locations — ORCA Shipping & Agencies</title>
 <meta name="description" content="ORCA Shipping and Agencies — head office in New Cairo and port operations in Alexandria, Damietta, and Ain Sokhna.">
 <link rel="icon" href="orca logo.svg">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
   /* Critical splash-screen CSS, inlined so it paints instantly — before the
      external stylesheet finishes loading. Without this, slower connections
@@ -64,7 +65,6 @@
   <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
     <button type="button" data-lang="en" class="lang-btn is-active">EN</button>
     <button type="button" data-lang="ar" class="lang-btn">AR</button>
-    <button type="button" data-lang="zh" class="lang-btn">中文</button>
   </div>
   <a class="nav-cta" href="index.html#quote" data-i18n="quote_cta">Get a Quotation</a>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
@@ -81,13 +81,21 @@
   </div>
 </section>
 
-<!-- ============ MAP ============ -->
+<!-- ============ MAP + KPIs + INFO PANEL ============ -->
 <section class="loc-map-section">
-  <img class="loc-map-img loc-map-img--pc" src="ORCAMAPPC.png" alt="Map of Egypt showing ORCA's operational presence: Head Office in New Cairo, Alexandria Port, Damietta branch office, and Sokhna branch office, each with their department listings">
-  <img class="loc-map-img loc-map-img--mobile" src="ORCAMAPMOBILE.png" alt="Map of Egypt showing ORCA's operational presence: Head Office in New Cairo, Alexandria Port, Damietta branch office, and Sokhna branch office, each with their department listings">
+  <div id="orcaMap" class="loc-map" role="application" aria-label="Interactive map of ORCA Shipping and Agencies locations"></div>
+
+  <div class="loc-kpis" id="locKpis"></div>
+
+  <div class="loc-info-panel" id="locInfoPanel" hidden>
+    <span class="loc-info-n" id="locInfoN"></span>
+    <h3 id="locInfoName"></h3>
+    <div class="loc-info-type" id="locInfoType"></div>
+    <p id="locInfoDesc"></p>
+  </div>
 </section>
 
-<!-- ============ LOCATION LIST (also serves as a no-JS fallback) ============ -->
+<!-- ============ LOCATION LIST (also serves as a no-JS fallback / accessible summary) ============ -->
 <section class="loc-list">
   <div class="loc-list-grid">
     <div class="loc-item">
@@ -122,7 +130,7 @@
     <img src="orca logo white.png" alt="">
     <h2 data-i18n="cta_heading">Ready to move what matters</h2>
     <div class="cta-actions">
-      <a class="btn-primary" href="index.html#quote" data-i18n="quote_cta">Get a Quotation</a>
+      <a class="btn-primary" href="mailto:info@orca-eg.com" data-i18n="nav_contact">Contact Us</a>
       <a class="btn-ghost" href="tel:+20226330247" dir="ltr">+2 02 63 30 2047</a>
     </div>
   </div>
@@ -156,6 +164,7 @@
   </div>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="i18n.js"></script>
