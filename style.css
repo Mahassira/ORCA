@@ -645,16 +645,6 @@ html[dir="rtl"] .oc-about-inner{text-align:right;}
 .loc-kpi-num{font-family:'Fraunces',serif; font-size:2.2rem; color:#fff;}
 .loc-kpi-lbl{font-size:0.78rem; color:var(--text-dim); margin-top:6px; letter-spacing:0.02em;}
 @media(max-width:600px){ .loc-kpis{grid-template-columns:repeat(2,1fr);} }
-
-/* Selected-location info panel, shown after a marker is clicked/tapped */
-.loc-info-panel{
-  margin-top:28px; max-width:640px; background:rgba(255,255,255,0.03); border:1px solid var(--line);
-  border-radius:4px; padding:26px 28px; color:#fff;
-}
-.loc-info-n{font-family:'Fraunces',serif; color:var(--sea-light); font-size:0.95rem;}
-.loc-info-panel h3{font-size:1.25rem; margin:10px 0 4px;}
-.loc-info-type{font-size:0.78rem; color:var(--sea-light); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px;}
-.loc-info-panel p{color:var(--text-dim); font-size:0.92rem; line-height:1.7; margin:0;}
 .loc-list{background:var(--paper); padding:min(14vh,120px) clamp(20px,6vw,64px);}
 .loc-list-grid{
   display:grid; grid-template-columns:repeat(4,1fr); gap:0;
