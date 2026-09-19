@@ -277,7 +277,7 @@
   function clamp01(v){ return Math.max(0, Math.min(1, v)); }
   function remap(v, a, b){ return clamp01((v - a) / (b - a)); }
 
-  ScrollTrigger.create({
+  var cineTrigger = ScrollTrigger.create({
     trigger: '#cinematic',
     start: 'top top',
     end: 'bottom bottom',
@@ -359,6 +359,13 @@
       }
     }
   });
+  // ScrollTrigger's onUpdate only fires on an actual scroll event by default —
+  // without this, every .scene (opacity:0 in CSS until JS sets it) and the
+  // hero copy stay invisible from page load until the very first scroll tick,
+  // which just happened to be masked for a while by the now-removed splash
+  // screen sharing the same navy color. This establishes the correct p=0
+  // visual state immediately.
+  cineTrigger.update();
 
   /* ---------------- SIMPLE REVEALS FOR STATIC SECTIONS ---------------- */
   gsap.utils.toArray('.about-media, .about-copy, .stat').forEach(function(el, i){
