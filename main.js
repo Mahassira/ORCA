@@ -277,13 +277,7 @@
   function clamp01(v){ return Math.max(0, Math.min(1, v)); }
   function remap(v, a, b){ return clamp01((v - a) / (b - a)); }
 
-  var cineTrigger = ScrollTrigger.create({
-    trigger: '#cinematic',
-    start: 'top top',
-    end: 'bottom bottom',
-    scrub: 0.6,
-    onUpdate: function(self){
-      var p = self.progress;
+  function updateCinematic(p){
       checkPreload(p);
       progressFill.style.height = (p * 100) + '%';
 
@@ -303,12 +297,12 @@
         setActiveScene(currentScene);
       }
 
-      /* --- act 1: hero copy --- */
-      var heroIn = remap(p, 0.0, 0.04);
+      /* --- act 1: hero copy ---
+         Visible immediately at p=0 (no fade-in on load) — it only fades
+         OUT as the user scrolls past the hero into the services section. */
       var heroOut = 1 - remap(p, 0.12, 0.16);
-      var heroOpacity = Math.min(heroIn, heroOut);
-      actHero.style.opacity = heroOpacity;
-      actHero.style.transform = 'translateY(' + (26 * (1 - heroIn)) + 'px)';
+      actHero.style.opacity = heroOut;
+      actHero.style.transform = 'none';
       scrollHint.style.opacity = (p < 0.04) ? (1 - remap(p, 0.015, 0.04)) : 0;
 
       /* --- act 2: services --- */
@@ -357,15 +351,28 @@
         actCargo.style.opacity = cargoOpText;
         actCargo.style.transform = 'translateY(' + (20 * (1 - cargoIn)) + 'px)';
       }
-    }
+  }
+
+  ScrollTrigger.create({
+    trigger: '#cinematic',
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 0.6,
+    onUpdate: function(self){ updateCinematic(self.progress); }
   });
-  // ScrollTrigger's onUpdate only fires on an actual scroll event by default —
-  // without this, every .scene (opacity:0 in CSS until JS sets it) and the
-  // hero copy stay invisible from page load until the very first scroll tick,
-  // which just happened to be masked for a while by the now-removed splash
-  // screen sharing the same navy color. This establishes the correct p=0
-  // visual state immediately.
-  cineTrigger.update();
+
+  // Every .scene starts at opacity:0 in CSS (crossfade groundwork), and the
+  // hero copy's visible state is entirely computed inside updateCinematic —
+  // both stay invisible from page load until the first real scroll event
+  // fires onUpdate above. A previous attempt fixed this by calling the
+  // ScrollTrigger instance's own .update() method, but GSAP only re-fires
+  // onUpdate when it detects the progress value has changed from what it
+  // already computed internally — since a freshly created trigger already
+  // resolves to progress 0 at the current (unscrolled) position, asking it
+  // to update to 0 again is treated as no change, so nothing actually ran.
+  // Calling the real rendering function directly, with an explicit 0,
+  // sidesteps that entirely and is not subject to any such optimization.
+  updateCinematic(0);
 
   /* ---------------- SIMPLE REVEALS FOR STATIC SECTIONS ---------------- */
   gsap.utils.toArray('.about-media, .about-copy, .stat').forEach(function(el, i){
