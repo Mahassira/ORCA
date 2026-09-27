@@ -108,9 +108,15 @@
     return '<div class="loc-popup"><strong>' + name + '</strong><p>' + desc + '</p></div>';
   }
 
+  function labelText(loc){
+    var d = dict();
+    return d[loc.nameKey] || loc.nameKey;
+  }
+
   function refreshMapPopups(){
     mapMarkers.forEach(function(entry){
       entry.marker.setPopupContent(popupHTML(entry.data));
+      entry.marker.setTooltipContent(labelText(entry.data));
     });
   }
 
@@ -137,9 +143,13 @@
       tap: true
     });
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 19,
+    // Label-free basemap: Esri's Dark Gray Canvas *base* layer contains land,
+    // water and borders only. Its city/country names live in a separate
+    // "reference" layer, which is deliberately never added here — so the only
+    // text on the map is the ORCA branch labels bound to the markers below.
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri',
+      maxZoom: 16,
       className: 'loc-map-tiles'
     }).addTo(map);
 
@@ -153,6 +163,13 @@
         fillOpacity: 0.9
       }).addTo(map);
       marker.bindPopup(popupHTML(loc));
+      // Always-visible branch name — the only place names shown on the map.
+      marker.bindTooltip(labelText(loc), {
+        permanent: true,
+        direction: 'right',
+        offset: [12, 0],
+        className: 'loc-map-label'
+      });
       // Desktop hover preview in addition to the click/tap that opens the
       // popup on every device (bindPopup already wires that up by default).
       marker.on('mouseover', function(){ marker.openPopup(); });
