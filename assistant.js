@@ -61,8 +61,8 @@
     },
     {
       kws: ['about','company','who are you','history','team','نبذة','شركة','فريق','عن الشركة'],
-      en: 'Learn more about us on the <a href="our-company.html">Our Company</a> page.',
-      ar: 'تقدر تعرف أكتر عننا في صفحة <a href="our-company.html">عن الشركة</a>.'
+      en: 'Learn more about us on the <a href="our company.html">Our Company</a> page.',
+      ar: 'تقدر تعرف أكتر عننا في صفحة <a href="our company.html">عن الشركة</a>.'
     },
     {
       kws: ['hi','hello','hey','مرحبا','اهلا','أهلا','السلام عليكم'],
@@ -95,7 +95,7 @@
   panel.className = 'orca-assist-panel';
   panel.innerHTML =
     '<div class="orca-assist-head">' +
-      '<img src="orca-logo-white.png" alt="">' +
+      '<img src="orca logo white.png" alt="">' +
       '<span id="orcaAssistTitle"></span>' +
     '</div>' +
     '<div class="orca-assist-body" id="orcaAssistBody"></div>' +
