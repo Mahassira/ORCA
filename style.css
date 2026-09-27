@@ -640,9 +640,24 @@ html[dir="rtl"] .oc-about-inner{text-align:right;}
 /* Standard OSM tiles re-colored to a dark navy theme with a pure CSS filter —
    no paid/keyed "dark mode" tile provider needed, and this can never break
    with an "API key required" tile the way a third-party styled provider can. */
+/* The basemap is already a dark, label-free gray canvas — this only nudges
+   its neutral gray toward the site's navy so it sits naturally in the page. */
 .loc-map-tiles{
-  filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9) saturate(0.7);
+  filter: sepia(0.35) hue-rotate(180deg) saturate(1.6) brightness(0.9);
 }
+#orcaMap{background:var(--navy-deep);}
+
+/* Permanent ORCA branch labels — the only names shown on the map */
+.leaflet-tooltip.loc-map-label{
+  background:rgba(10,27,46,0.88); color:#fff;
+  border:1px solid rgba(123,179,164,0.45); border-radius:3px;
+  box-shadow:none; padding:4px 9px;
+  font-family:inherit; font-size:0.76rem; font-weight:600; letter-spacing:0.01em;
+  white-space:nowrap;
+}
+.leaflet-tooltip-right.loc-map-label::before{border-right-color:rgba(123,179,164,0.45);}
+.leaflet-tooltip-left.loc-map-label::before{border-left-color:rgba(123,179,164,0.45);}
+@media(max-width:600px){ .leaflet-tooltip.loc-map-label{font-size:0.68rem; padding:3px 7px;} }
 
 /* Leaflet popup re-skinned to match the site's palette instead of its default white box */
 .leaflet-popup-content-wrapper{background:var(--navy-deep); color:#fff; border-radius:4px;}
