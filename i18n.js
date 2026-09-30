@@ -128,9 +128,9 @@ window.ORCA_I18N = {
     oc_team_1_bio: "Ayman El Maghraby is an experienced maritime industry leader with extensive expertise in operations management, freight, import, sales, negotiation, and business development. As CEO & Managing Director, he leads ORCA's strategic direction and supports the company's growth through strong commercial and operational expertise. He holds a Bachelor's degree in Accounting from the Faculty of Commerce, Ain Shams University.",
 
     oc_team_2_name: "Mohamed Fakher",
-    oc_team_2_title: "Commercial Manager",
+    oc_team_2_title: "Line Manager",
     oc_team_2_role_extra: "ORCA Shipping And Agencies — SeaLead Agent",
-    oc_team_2_bio: "Mohamed Fakher is the Commercial Manager at ORCA Shipping And Agencies, supporting the company's commercial activities and business relationships as SeaLead Agent in Egypt.",
+    oc_team_2_bio: "Mohamed Fakher is the line Manager at ORCA Shipping And Agencies, supporting the company's shipping line activities and business relationships as SeaLead Agent in Egypt.",
 
     oc_team_3_name: "Mona Saleh",
     oc_team_3_title: "Customer Excellence Manager",
@@ -142,7 +142,7 @@ window.ORCA_I18N = {
 
     oc_team_5_name: "Shahinaz Soussa",
     oc_team_5_title: "Human Resources Manager",
-    oc_team_5_bio: "Shahinaz Soussa brings experience in financial management within the maritime industry, with expertise in accounts receivable, financial reporting, account reconciliation, and Microsoft Excel. Her previous experience at Maersk strengthened her capabilities in financial reporting and transparency. At ORCA, she contributes to continuous improvement and the achievement of strategic organizational objectives.",
+    oc_team_5_bio: "Shahinaz Soussa brings experience in financial management within the maritime industry, with expertise in human resource management, financial reporting, account reconciliation, and reporting. Her previous experience at Maersk strengthened her capabilities in financial reporting and transparency. At ORCA, she contributes to continuous improvement and the achievement of strategic organizational objectives.",
 
     nav_locations: "Our Locations",
     nav_digital: "Digital Solutions",
@@ -348,9 +348,9 @@ window.ORCA_I18N = {
     oc_team_1_bio: "أيمن المغربي قائد ذو خبرة واسعة في صناعة الشحن البحري، تشمل إدارة العمليات والشحن والاستيراد والمبيعات والتفاوض وتطوير الأعمال. بصفته الرئيس التنفيذي والمدير العام، يقود التوجه الاستراتيجي لشركة أوركا ويدعم نموها من خلال خبرته التجارية والتشغيلية القوية. حاصل على بكالوريوس المحاسبة من كلية التجارة، جامعة عين شمس.",
 
     oc_team_2_name: "محمد فاخر",
-    oc_team_2_title: "المدير التجاري",
+    oc_team_2_title: "مدير الخط الملاحي",
     oc_team_2_role_extra: "أوركا للشحن والوكالات — وكيل SeaLead",
-    oc_team_2_bio: "محمد فاخر هو المدير التجاري في أوركا للشحن والوكالات، ويدعم الأنشطة التجارية للشركة وعلاقات الأعمال بصفته وكيل SeaLead في مصر.",
+    oc_team_2_bio: "محمد فاخر هو مدير الخط الملاحي في أوركا للشحن والوكالات، ويدعم أنشطة الخط الملاحي للشركة وعلاقات الأعمال بصفته وكيل SeaLead في مصر.",
 
     oc_team_3_name: "منى صالح",
     oc_team_3_title: "مديرة تميّز العملاء",
@@ -362,7 +362,7 @@ window.ORCA_I18N = {
 
     oc_team_5_name: "شاهيناز سوسة",
     oc_team_5_title: "مديرة الموارد البشرية",
-    oc_team_5_bio: "تتمتع شاهيناز سوسة بخبرة في الإدارة المالية داخل صناعة الشحن البحري، مع كفاءة في الذمم المدينة والتقارير المالية والتسويات المحاسبية وبرنامج Microsoft Excel. عزّزت خبرتها السابقة لدى Maersk قدراتها في التقارير المالية والشفافية. تسهم في أوركا بتحقيق التحسين المستمر والأهداف الاستراتيجية للمؤسسة.",
+    oc_team_5_bio: "تتمتع شاهيناز سوسة بخبرة في الإدارة المالية داخل صناعة الشحن البحري، مع كفاءة في إدارة الموارد البشرية والتقارير المالية والتسويات المحاسبية وإعداد التقارير. عزّزت خبرتها السابقة لدى Maersk قدراتها في التقارير المالية والشفافية. تسهم في أوركا بتحقيق التحسين المستمر والأهداف الاستراتيجية للمؤسسة.",
 
     nav_locations: "مواقعنا",
     nav_digital: "الحلول الرقمية",
