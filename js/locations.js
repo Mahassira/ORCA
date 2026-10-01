@@ -7,7 +7,7 @@
    all derived from this same array, nothing is hard-coded twice.
 
    Every name/description shown comes from the existing i18n
-   dictionary (i18n.js) — this file does not introduce any new
+   dictionary (js/i18n.js) — this file does not introduce any new
    copy of its own. KPI numbers (locations/countries/ports/head
    offices) are computed by counting this array, not typed in by
    hand, so they can never drift out of sync with what the map
@@ -24,12 +24,20 @@
      Head office coordinate confirmed directly from Google Maps by
      the client; port coordinates sourced from public port-authority
      and reference data. */
+  // labelDir: which side of the marker the permanent branch label sits on,
+  // chosen so neighbouring labels (Alexandria/Damietta, Cairo/Sokhna) never overlap.
   var LOCATIONS = [
-    { id:'hq',       nameKey:'loc_hq_name',       descKey:'loc_hq_desc',       country:'Egypt', type:'hq',   lat:30.018210439162882, lng:31.464246225717318 },
-    { id:'alex',     nameKey:'loc_alex_name',     descKey:'loc_alex_desc',     country:'Egypt', type:'port', lat:31.2000, lng:29.8800 },
-    { id:'damietta', nameKey:'loc_damietta_name', descKey:'loc_damietta_desc', country:'Egypt', type:'port', lat:31.4670, lng:31.7680 },
-    { id:'sokhna',   nameKey:'loc_sokhna_name',   descKey:'loc_sokhna_desc',   country:'Egypt', type:'port', lat:29.6480, lng:32.3560 }
+    { id:'hq',       nameKey:'loc_hq_name',       descKey:'loc_hq_desc',       country:'Egypt', type:'hq',   lat:30.018210439162882, lng:31.464246225717318, labelDir:'left'  },
+    { id:'alex',     nameKey:'loc_alex_name',     descKey:'loc_alex_desc',     country:'Egypt', type:'port', lat:31.2000, lng:29.8800, labelDir:'left'  },
+    { id:'damietta', nameKey:'loc_damietta_name', descKey:'loc_damietta_desc', country:'Egypt', type:'port', lat:31.4670, lng:31.7680, labelDir:'right' },
+    { id:'sokhna',   nameKey:'loc_sokhna_name',   descKey:'loc_sokhna_desc',   country:'Egypt', type:'port', lat:29.6480, lng:32.3560, labelDir:'right' }
   ];
+
+  /* ---------------- MAP FRAMING ----------------
+     The view is framed on Egypt; the surrounding region stays visible.
+     No place names appear anywhere: the basemap is label-free, and the
+     only text on the map is the ORCA branch labels. */
+  var EGYPT_BOUNDS = [[21.8, 24.7], [31.9, 36.95]];
 
   var mapMarkers = []; // {marker, data}
   var map = null;
@@ -108,9 +116,15 @@
     return '<div class="loc-popup"><strong>' + name + '</strong><p>' + desc + '</p></div>';
   }
 
+  function labelText(loc){
+    var d = dict();
+    return d[loc.nameKey] || loc.nameKey;
+  }
+
   function refreshMapPopups(){
     mapMarkers.forEach(function(entry){
       entry.marker.setPopupContent(popupHTML(entry.data));
+      entry.marker.setTooltipContent(labelText(entry.data));
     });
   }
 
@@ -125,8 +139,9 @@
     if(!el || !window.L) return;
 
     map = L.map('orcaMap', {
-      center: [30.6, 31.6],
+      center: [26.9, 30.8],
       zoom: 6,
+      zoomSnap: 0.1,          // fractional zoom so Egypt can fill the frame tightly
       zoomControl: false,
       dragging: false,
       scrollWheelZoom: false,
@@ -137,13 +152,16 @@
       tap: true
     });
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 19,
+    // Label-free basemap: Esri's Dark Gray Canvas *base* layer contains land,
+    // water and borders only. Its city/country names live in a separate
+    // "reference" layer, which is deliberately never added here — so the only
+    // text on the map is the ORCA branch labels bound to the markers below.
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri',
+      maxZoom: 16,
       className: 'loc-map-tiles'
     }).addTo(map);
 
-    var bounds = [];
     LOCATIONS.forEach(function(loc){
       var marker = L.circleMarker([loc.lat, loc.lng], {
         radius: 9,
@@ -153,16 +171,32 @@
         fillOpacity: 0.9
       }).addTo(map);
       marker.bindPopup(popupHTML(loc));
+      // Always-visible branch name — the only place names shown on the map.
+      var dir = loc.labelDir === 'left' ? 'left' : 'right';
+      marker.bindTooltip(labelText(loc), {
+        permanent: true,
+        direction: dir,
+        offset: [dir === 'left' ? -12 : 12, 0],
+        className: 'loc-map-label'
+      });
       // Desktop hover preview in addition to the click/tap that opens the
       // popup on every device (bindPopup already wires that up by default).
       marker.on('mouseover', function(){ marker.openPopup(); });
       mapMarkers.push({ marker: marker, data: loc });
-      bounds.push([loc.lat, loc.lng]);
     });
 
-    if(bounds.length){
-      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 7 });
+    function frameEgypt(){
+      map.invalidateSize();
+      map.fitBounds(EGYPT_BOUNDS, { padding: [16, 16] });
     }
+    frameEgypt();
+
+    // Keep Egypt framed when the viewport changes (window resize, phone rotation).
+    var resizeTimer = null;
+    window.addEventListener('resize', function(){
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(frameEgypt, 200);
+    });
   }
 
   var mapSection = document.getElementById('orcaMap');
