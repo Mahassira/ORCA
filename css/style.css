@@ -114,6 +114,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     opacity:0; visibility:hidden; transition:opacity .35s ease, visibility .35s ease;
   }
   body.nav-open .site-nav::before{opacity:1; visibility:visible;}
+  /* On mobile the header never uses backdrop-filter: an element with a
+     backdrop-filter becomes the containing block for its position:fixed
+     children, which re-anchored the closed sheet to the header's box and
+     left it visible mid-screen once the page was scrolled. A near-opaque
+     background gives the same look without that side effect. */
+  .site-nav.is-solid{backdrop-filter:none; -webkit-backdrop-filter:none; background:rgba(10,27,46,.96);}
   /* header controls sit above the dim layer */
   .nav-logo, .lang-switch, .nav-toggle{position:relative; z-index:2;}
   /* no blur/background while open: a backdrop-filter would also trap the
@@ -131,9 +137,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     flex-direction:column; align-items:stretch; justify-content:flex-start; gap:0;
     padding:10px 22px calc(22px + env(safe-area-inset-bottom, 0px));
     overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch;
-    transform:translateY(105%); transition:transform .45s var(--ease);
+    transform:translateY(105%); visibility:hidden;
+    transition:transform .45s var(--ease), visibility 0s linear .45s;   /* hide only after it has slid away */
   }
-  .nav-links.open{transform:translateY(0);}
+  .nav-links.open{transform:translateY(0); visibility:visible; transition:transform .45s var(--ease), visibility 0s linear 0s;}
 
   .nav-links-logo{display:none;}   /* the header logo stays visible instead */
 
