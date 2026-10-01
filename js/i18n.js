@@ -147,8 +147,9 @@ window.ORCA_I18N = {
     nav_locations: "Our Locations",
     nav_digital: "Digital Solutions",
     menu_label: "Menu",
-    menu_call: "Call",
-    menu_email: "Email",
+    menu_group_explore: "Explore",
+    menu_group_company: "Company",
+    menu_group_contact: "Get in touch",
 
     ds_page_title: "Digital Solutions — ORCA Shipping & Agencies",
     ds_hero_eyebrow: "Digital Solutions",
@@ -370,8 +371,9 @@ window.ORCA_I18N = {
     nav_locations: "مواقعنا",
     nav_digital: "الحلول الرقمية",
     menu_label: "القائمة",
-    menu_call: "اتصل بنا",
-    menu_email: "البريد الإلكتروني",
+    menu_group_explore: "استكشف",
+    menu_group_company: "الشركة",
+    menu_group_contact: "ابقَ على تواصل",
 
     ds_page_title: "الحلول الرقمية — أوركا للشحن والوكالات",
     ds_hero_eyebrow: "الحلول الرقمية",

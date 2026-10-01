@@ -45,7 +45,7 @@
   document.querySelectorAll('.lang-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       applyLanguage(btn.dataset.lang);
-      if(typeof navLinks !== 'undefined' && navLinks.classList.contains('open')) closeMobileNav();
+      // the menu stays open on a language switch and re-labels itself in place
     });
   });
   var savedLang = getSavedLang();
