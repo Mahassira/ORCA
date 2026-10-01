@@ -6,9 +6,10 @@
    - Escape closes the menu; Tab stays inside it while open
    - focus moves into the menu on open and back to the button on close
    - the burger button's spoken label follows state and language
-   - the backdrop image loads only after the page itself has loaded
-   The menu text itself follows the page language through i18n.js,
-   so it always opens in whichever language the page is showing.
+   - tapping the dimmed page or the sheet's grab handle closes it
+   The EN/AR switch stays in the header, outside the sheet. The menu
+   text follows the page language through i18n.js, so the sheet always
+   opens in whichever language the page is showing.
    ============================================================ */
 (function(){
   "use strict";
@@ -49,7 +50,7 @@
     wasOpen = open;
     syncLabel();
     if(open){
-      var first = navLinks.querySelector('.nav-menu-label + a') || navLinks.querySelector('a');
+      var first = navLinks.querySelector('a');
       if(first) setTimeout(function(){ try{ first.focus({ preventScroll: true }); }catch(e){ first.focus(); } }, 60);
     } else if(navLinks.contains(document.activeElement)){
       try{ toggle.focus({ preventScroll: true }); }catch(e){ toggle.focus(); }
@@ -65,15 +66,23 @@
       return;
     }
     if(e.key === 'Tab'){
-      var items = [toggle].concat(Array.prototype.slice.call(navLinks.querySelectorAll('a[href], button')));
+      var langBtns = Array.prototype.slice.call(document.querySelectorAll('#langSwitch button'));
+      var items = langBtns.concat([toggle], Array.prototype.slice.call(navLinks.querySelectorAll('a[href], button')));
       var i = items.indexOf(document.activeElement);
       if(e.shiftKey && i <= 0){ e.preventDefault(); items[items.length - 1].focus(); }
       else if(!e.shiftKey && i === items.length - 1){ e.preventDefault(); items[0].focus(); }
     }
   });
 
-  /* ---- backdrop image after the page has loaded (mobile CSS only uses it) ---- */
-  function ready(){ navLinks.classList.add('menu-ready'); }
-  if(document.readyState === 'complete') setTimeout(ready, 300);
-  else window.addEventListener('load', function(){ setTimeout(ready, 300); });
+  /* ---- tap the dimmed page (drawn on <nav> itself) or the grab handle to close ---- */
+  var nav = document.getElementById('siteNav');
+  if(nav){
+    nav.addEventListener('click', function(e){
+      if(isOpen() && e.target === nav) toggle.click();
+    });
+  }
+  var handle = navLinks.querySelector('.nav-sheet-handle');
+  if(handle){
+    handle.addEventListener('click', function(){ if(isOpen()) toggle.click(); });
+  }
 })();
