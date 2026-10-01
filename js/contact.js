@@ -4,9 +4,9 @@
    plus the new general-inquiry Contact form submit handler.
 
    This form is technically separate from the homepage's quotation
-   form (#quoteForm in main.js): its own fields, its own element
+   form (#quoteForm in js/main.js): its own fields, its own element
    IDs, its own submit handler below. Nothing here reads from or
-   writes to the quote form's state, and nothing in main.js touches
+   writes to the quote form's state, and nothing in js/main.js touches
    this one.
    ============================================================ */
 (function(){
