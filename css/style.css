@@ -1071,31 +1071,30 @@ html[dir="rtl"] .oc-about-inner{text-align:right;}
 }
 
 /* ============================================================
-   MOBILE BUTTONS — one consistent size everywhere on phones.
+   MOBILE BUTTONS — one consistent, medium size everywhere on phones.
    Paired buttons (e.g. "Get a Quotation" + "Contact ORCA") used to
    shrink-wrap their text, so each pair had two different widths, and
    the outlined button was 2px taller because of its border. On phones
-   every action button is now the same height (52px, matching the
-   mobile menu's quotation button) and the same width: the full content
-   width of the page, capped at 420px on larger screens. box-sizing keeps the outline inside that height.
+   every action button is now exactly 240 x 48px — wide enough for the
+   longest label in either language — stacked with a 12px gap.
+   box-sizing keeps the outline inside that height.
    Kept last in the file so it wins over the base button rules.
    ============================================================ */
 @media(max-width:760px){
-  .cta-actions, .ds-hero-actions, .hero-actions{
-    flex-direction:column; align-items:stretch; gap:12px;
-    width:100%; max-width:420px;
+  .cta-actions, .ds-hero-actions, .hero-actions, .qf-actions{
+    flex-direction:column; gap:12px;
   }
-  .cta-actions{margin-inline:auto;}
+  .cta-actions{align-items:center;}                                   /* centred sections */
+  .ds-hero-actions, .hero-actions, .qf-actions{align-items:flex-start;} /* text-aligned sections */
   .cta-actions > .btn-primary, .cta-actions > .btn-ghost,
   .ds-hero-actions > .btn-primary, .ds-hero-actions > .btn-ghost,
   .hero-actions > .btn-primary, .hero-actions > .btn-ghost,
   .ds-connect-inner > .btn-primary,
   .qf-actions > .btn-submit{
     display:flex; align-items:center; justify-content:center; box-sizing:border-box;
-    width:100%; height:52px; padding:0 20px; text-align:center; white-space:nowrap;
+    width:240px; max-width:100%; height:48px; padding:0 18px;
+    font-size:0.9rem; text-align:center; white-space:nowrap;
   }
-  .ds-connect-inner > .btn-primary{max-width:420px; margin-inline:auto;}
-  .qf-actions{max-width:420px;}
-  .qf-actions{flex-direction:column; align-items:stretch; gap:12px;}
+  .ds-connect-inner > .btn-primary{margin-inline:auto;}
   .qf-actions > .qf-status:empty{display:none;}
 }
