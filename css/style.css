@@ -483,8 +483,8 @@ body.nav-open{
 }
 
 .qf-actions{display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
-.btn-submit{background:var(--navy); color:#fff;}
-.btn-submit:hover{background:var(--sea);}
+.btn-submit, .btn-primary.btn-submit{background:var(--navy); color:#fff;}   /* .btn-primary (white) is declared later, so the pair needs the extra specificity */
+.btn-submit:hover, .btn-primary.btn-submit:hover{background:var(--sea); color:#fff;}
 .qf-status{font-size:0.88rem; color:var(--sea);}
 
 /* ---------------- CTA ---------------- */
@@ -1068,4 +1068,34 @@ html[dir="rtl"] .oc-about-inner{text-align:right;}
 @media(max-width:480px){
   .orca-assist-panel{inset-inline:16px; bottom:86px; width:auto;}
   .orca-assist-fab{bottom:16px; inset-inline-end:16px;}
+}
+
+/* ============================================================
+   MOBILE BUTTONS — one consistent size everywhere on phones.
+   Paired buttons (e.g. "Get a Quotation" + "Contact ORCA") used to
+   shrink-wrap their text, so each pair had two different widths, and
+   the outlined button was 2px taller because of its border. On phones
+   every action button is now the same height (52px, matching the
+   mobile menu's quotation button) and the same width: the full content
+   width of the page, capped at 420px on larger screens. box-sizing keeps the outline inside that height.
+   Kept last in the file so it wins over the base button rules.
+   ============================================================ */
+@media(max-width:760px){
+  .cta-actions, .ds-hero-actions, .hero-actions{
+    flex-direction:column; align-items:stretch; gap:12px;
+    width:100%; max-width:420px;
+  }
+  .cta-actions{margin-inline:auto;}
+  .cta-actions > .btn-primary, .cta-actions > .btn-ghost,
+  .ds-hero-actions > .btn-primary, .ds-hero-actions > .btn-ghost,
+  .hero-actions > .btn-primary, .hero-actions > .btn-ghost,
+  .ds-connect-inner > .btn-primary,
+  .qf-actions > .btn-submit{
+    display:flex; align-items:center; justify-content:center; box-sizing:border-box;
+    width:100%; height:52px; padding:0 20px; text-align:center; white-space:nowrap;
+  }
+  .ds-connect-inner > .btn-primary{max-width:420px; margin-inline:auto;}
+  .qf-actions{max-width:420px;}
+  .qf-actions{flex-direction:column; align-items:stretch; gap:12px;}
+  .qf-actions > .qf-status:empty{display:none;}
 }
