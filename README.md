@@ -1,38 +1,9 @@
-# ORCA Shipping & Agencies — Website
+# ORCA Shipping & Agencies
 
-Bilingual (English / Arabic) corporate website, hosted on GitHub Pages.
+Company website for ORCA, a shipping and logistics company in Egypt. English and Arabic.
 
-## Structure
+**Live:** https://mahassira.github.io/ORCA/
 
-```
-/                       Pages (GitHub Pages serves index.html from the root)
-├── index.html          Home
-├── services.html       Services & Logistics
-├── digital-solutions.html
-├── our-company.html    Our Company (our company.html only redirects here)
-├── locations.html      Our Locations (interactive map)
-├── contact.html        Contact form
-├── portal-*.html       ORCA Connect customer portal (demo prototype)
-├── css/
-│   └── style.css       All site styles
-├── js/
-│   ├── i18n.js         English / Arabic text for every page
-│   ├── main.js         Home page (cinematic hero, quote form)
-│   ├── mobile-menu.js  Shared mobile menu behaviour
-│   ├── assistant.js    Virtual assistant widget
-│   └── …               One script per page, plus portal demo data
-└── assets/
-    ├── images/         Photos, posters and backgrounds
-    │   └── team/       Leadership portraits
-    ├── videos/         Hero and section videos
-    └── logo/           ORCA logos
-```
+It has the services, office locations on a map, a quote form, and a small demo of the customer portal where clients track their shipments.
 
-## Editing text
-
-All visible text lives in `js/i18n.js` (an `en` block and an `ar` block).
-Change the text there — the HTML only holds fallback copies.
-
-## Naming
-
-File names use lowercase and hyphens, no spaces (e.g. `mohamed-aly.jpg`).
+Built with plain HTML, CSS and JavaScript. All the text, in both languages, lives in `js/i18n.js`, so that's the only file to touch when the wording changes.
